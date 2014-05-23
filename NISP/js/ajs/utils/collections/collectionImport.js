@@ -1,0 +1,9 @@
+//$.aos.require("ajs/utils/collections/base.js");
+$.aos.require("ajs/utils/collections/CollectionInterfaces.js");
+$.aos.require("ajs/utils/collections/AbstractCollections.js");
+$.aos.require("ajs/utils/collections/ArrayList.js");
+$.aos.require("ajs/utils/collections/HashMap.js");
+$.aos.require("ajs/utils/collections/HashSet.js");
+$.aos.require("ajs/utils/collections/LinkedHashMap.js");
+$.aos.require("ajs/utils/collections/LinkedHashSet.js");
+//console.log(Imports.imported_js_files);

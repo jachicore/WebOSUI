@@ -1,0 +1,329 @@
+@charset "utf-8";
+/*
+ * @name: common
+ * @overview: 公用样式
+ * @require: null
+ */ 
+ 
+/* 链接样式 */
+.mm-link{ color:#356DE4;}
+.mm-link:hover{ color:#F00;} 
+
+/* 清理浮动 */
+.mm-clear:after {
+visibility:hidden;
+display:block;
+font-size:0;
+content:" ";
+clear:both;
+height:0;
+}
+.mm-clear {
+zoom:1; /* for IE6 IE7 */
+}
+
+/* 隐藏 */
+.mm-hide {
+display:none;
+}
+
+/* 设置内联 */
+.mm-left,.mm-right {display:inline;}
+.mm-left {float:left;}
+.mm-right {float:right;}
+
+/* 浮动 fixed */
+.mm-fixed{ position:fixed;}
+
+/* 标题 */
+h1,h2,h3,h4,h5,h6{ font-weight:bold; margin:25px 0 5px 0;}
+h1{ font-size:36px;}
+h2{ font-size:24px;}
+h3{ font-size:18px;}
+h4{ font-size:16px;}
+h5{ font-size:14px;}
+h6{ font-size:12px;}
+
+
+/* 
+ * @name: mm-button
+ * @overview: 通用按钮
+ * @require: null
+ */
+.mm-button{
+	padding:4px 14px;
+	margin:0 5px;
+	cursor:pointer;
+	color:#666;
+	border:1px solid #888;
+	background: #D5D5D5;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#FAFAFA), to(#D5D5D5));
+	background: -webkit-linear-gradient(#FAFAFA, #D5D5D5);
+	background: -moz-linear-gradient(#FAFAFA, #D5D5D5);
+	background: -ms-linear-gradient(#FAFAFA, #D5D5D5);
+	background: -o-linear-gradient(#FAFAFA, #D5D5D5);
+	background: linear-gradient(#FAFAFA, #D5D5D5);
+}
+.mm-button:hover{
+	color:#3985B3;
+	border:1px solid #589CA6;
+	background: #D8E6EF;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#F7FBFE), to(#D8E6EF));
+	background: -webkit-linear-gradient(#F7FBFE, #D8E6EF);
+	background: -moz-linear-gradient(#F7FBFE, #D8E6EF);
+	background: -ms-linear-gradient(#F7FBFE, #D8E6EF);
+	background: -o-linear-gradient(#F7FBFE, #D8E6EF);
+	background: linear-gradient(#F7FBFE, #D8E6EF);
+}
+
+/* mm-button-ok
+----------------------------------*/
+.mm-button-ok{
+	color:#FFF;
+	text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+	border:1px solid #708090;
+	background: #6EBC40;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#6EBC40), to(#35810A));
+	background: -webkit-linear-gradient(#6EBC40, #35810A);
+	background: -moz-linear-gradient(#6EBC40, #35810A);
+	background: -ms-linear-gradient(#6EBC40, #35810A);
+	background: -o-linear-gradient(#6EBC40, #35810A);
+	background: linear-gradient(#6EBC40, #35810A);}
+
+.mm-button-ok:hover{
+	color:#FFF;
+	border:1px solid #429E34;
+	background: #54B73C;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#80CB5B), to(#54B73C));
+	background: -webkit-linear-gradient(#80CB5B, #429E34);
+	background: -moz-linear-gradient(#80CB5B, #54B73C);
+	background: -ms-linear-gradient(#80CB5B, #54B73C);
+	background: -o-linear-gradient(#80CB5B, #54B73C);
+	background: linear-gradient(#80CB5B, #54B73C);
+}
+
+/* 
+ * @name: mm-input
+ * @overview: 通用input
+ * @require: null
+ */
+ .mm-label,
+ .mm-input,
+ .mm-select{
+ 	height:24px;
+	line-height:24px;
+	padding:0 4px;
+ }
+/* label
+----------------------------------*/
+.mm-label{
+	text-align:right;
+}
+
+/* input
+----------------------------------*/
+.mm-input{
+	text-align:left;
+}
+/* select
+----------------------------------*/
+.mm-select{
+	height:26px;
+	line-height:26px;
+	padding: 3px 2px 2px 4px;
+}
+/* textarea
+----------------------------------*/
+.mm-textarea{
+	line-height:20px;
+	padding:2px;
+}
+
+/* input status
+----------------------------------*/
+/* 初始 */
+.mm-input,
+.mm-select,
+.mm-textarea{
+	border:1px solid #cccccc;
+}
+/* 选中 */
+.mm-input:hover,.mm-input-focus,
+.mm-select:hover,
+.mm-textarea:hover{
+	border-color:#377bcb;
+}
+/* 输入错误 */
+.mm-input-error{border-color:#CD0A0A; color:#CD0A0A;}
+
+/* 禁用 */
+.mm-input-disabled,.mm-input-disabled:hover{border:1px solid #CCC; background:#F8F8F8; color:#AAA;}
+
+
+/* 
+ * @name: mm-title-bg
+ * @overview: 标题背景
+ * @require: null
+ */
+.mm-title-bg{
+	color:#fff;
+	background: #272727;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#696969), to(#272727));
+	background: -webkit-linear-gradient(#696969, #272727);
+	background: -moz-linear-gradient(#696969, #272727);
+	background: -ms-linear-gradient(#696969, #272727);
+	background: -o-linear-gradient(#696969, #272727);
+	background: linear-gradient(#696969, #272727);
+}
+
+.mm-title-bg-blue{
+	color:#FFF;
+	background: #2DA6D7;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#A3E1F2), to(#2DA6D7));
+	background: -webkit-linear-gradient(#A3E1F2, #2DA6D7);
+	background: -moz-linear-gradient(#A3E1F2, #2DA6D7);
+	background: -ms-linear-gradient(#A3E1F2, #2DA6D7);
+	background: -o-linear-gradient(#A3E1F2, #2DA6D7);
+	background: linear-gradient(#A3E1F2, #2DA6D7);
+}
+
+.mm-title-bg-gray{
+	color:#555;
+	border:1px solid #ccc;
+	background: #EBEBEB;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#F8F8F8), to(#EBEBEB));
+	background: -webkit-linear-gradient(#F8F8F8, #EBEBEB);
+	background: -moz-linear-gradient(#F8F8F8, #EBEBEB);
+	background: -ms-linear-gradient(#F8F8F8, #EBEBEB);
+	background: -o-linear-gradient(#F8F8F8, #EBEBEB);
+	background: linear-gradient(#F8F8F8, #EBEBEB);
+}
+
+.mm-title-bg-green{
+	color:#FFF;
+	text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+	border:1px solid #708090;
+	background: #6EBC40;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#6EBC40), to(#35810A));
+	background: -webkit-linear-gradient(#6EBC40, #35810A);
+	background: -moz-linear-gradient(#6EBC40, #35810A);
+	background: -ms-linear-gradient(#6EBC40, #35810A);
+	background: -o-linear-gradient(#6EBC40, #35810A);
+	background: linear-gradient(#6EBC40, #35810A);
+}
+/* 
+ * @name: mm-border
+ * @overview: 边框
+ * @require: null
+ */
+.mm-border{
+	border:1px solid #ccc;
+}
+
+/* 
+ * @name: mm-corner-all 全部圆角
+ * @name: mm-corner-top 顶部边框圆角
+ * @name: mm-corner-bottom 底部边框圆角
+ * @overview: 圆角边框
+ * @require: null
+ */
+ 
+/* mm-corner-all */
+.mm-corner-all{
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+/* mm-corner-normal */
+.mm-corner-normal{
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+}
+
+/* mm-corner-top */
+.mm-corner-top{
+	-webkit-border-top-left-radius: 4px;
+	-moz-border-top-left-radius: 4px;
+	border-top-left-radius: 4px;
+	-webkit-border-top-right-radius: 4px;
+	-moz-border-top-right-radius: 4px;
+	border-top-right-radius: 4px;
+}
+
+/* mm-corner-bottom */
+.mm-corner-bottom{
+	-webkit-border-bottom-left-radius: 4px;
+	-moz-border-bottom-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+	-webkit-border-bottom-right-radius: 4px;
+	-moz-border-bottom-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+
+/* 
+ * @name: mm-shadow
+ * @overview: 阴影
+ * @require: null
+ */
+.mm-shadow{
+	-webkit-box-shadow: #666 0px 2px 3px;
+	-moz-box-shadow: #666 0px 2px 3px;
+	box-shadow: #666 0px 2px 3px;
+}
+
+
+
+/* 
+ * @name: mm-icon
+ * @overview: 图标
+ * @require: null
+ */
+.mm-icon { 
+	width: 16px; 
+	height: 16px;  
+	display: block; 
+	text-indent: -99999px; 
+	overflow: hidden;
+	background-image:url(images/mm-icons.png); 
+	background-repeat: no-repeat;
+}
+
+/* positioning */
+.mm-icon-min {  background-image:url(images/mm-icons_fff.png);background-position: -64px -128px; } /* 最小化 */
+.mm-icon-max {  background-image:url(images/mm-icons_fff.png);background-position: -176px -128px; } /* 最大化 */
+.mm-icon-close { background-image:url(images/mm-icons_fff.png); background-position: -80px -128px; } /* 关闭 */
+.mm-icon-closethick { background-image:url(images/mm-icons_fff.png); background-position: -96px -128px; } /* 关闭加粗 */
+
+.mm-icon-min:hover {  background-image:url(images/mm-icons.png);background-position: -64px -128px; } /* 最小化 */
+.mm-icon-max:hover{  background-image:url(images/mm-icons.png);background-position: -176px -128px; } /* 最大化 */
+.mm-icon-close:hover{ background-image:url(images/mm-icons.png); background-position: -80px -128px; } /* 关闭 */
+.mm-icon-closethick:hover { background-image:url(images/mm-icons.png); background-position: -96px -128px; } /* 关闭加粗 */
+
+.mm-icon-resizable-se { background-position: -80px -224px; } /* 窗口缩放 */
+.mm-icon-notes{ background-position: -16px -144px; } /* 说明 */
+.mm-icon-alert{ background-position: 0 -144px; } /* 警告 */
+.mm-icon-error{ background-position: 0 -128px; } /* 错误 */
+.mm-icon-folder-closed { background-position: 0 -96px; } /* 文件夹关闭 */
+.mm-icon-folder-open{ background-position: -16px -96px; } /* 文件夹打开 */
+
+
+/* 
+ * @name: mm-resizable
+ * @overview: 窗口缩放
+ * @require: null
+ */
+.mm-resizable { position: relative;}
+.mm-resizable-handle { position: absolute;font-size: 0.1px;z-index:996; display: block; }
+.mm-resizable-disabled .mm-resizable-handle,
+.mm-resizable-autohide .mm-resizable-handle { display: none; }
+.mm-resizable-n { cursor: n-resize; height: 7px; width: 100%; top: -5px; left: 0; }
+.mm-resizable-s { cursor: s-resize; height: 7px; width: 100%; bottom: -5px; left: 0; }
+.mm-resizable-e { cursor: e-resize; width: 7px; right: -5px; top: 0; height: 100%; }
+.mm-resizable-w { cursor: w-resize; width: 7px; left: -5px; top: 0; height: 100%; }
+.mm-resizable-se { cursor: se-resize; width: 12px; height: 12px; right: 1px; bottom: 1px; z-index: 1001;}
+.mm-resizable-sw { cursor: sw-resize; width: 9px; height: 9px; left: -5px; bottom: -5px; z-index: 1002;}
+.mm-resizable-nw { cursor: nw-resize; width: 9px; height: 9px; left: -5px; top: -5px; z-index: 1003;}
+.mm-resizable-ne { cursor: ne-resize; width: 9px; height: 9px; right: -5px; top: -5px;z-index: 1004;}

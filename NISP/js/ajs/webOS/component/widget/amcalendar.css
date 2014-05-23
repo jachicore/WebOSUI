@@ -1,0 +1,44 @@
+@charset "utf-8";
+/**
+ *  文件: amcalendar.css
+ *  描述：
+ 		  简介好用的日历Widget
+**/
+
+.aui-calendar-c_yellow{ color:#FF6400;}
+.aui-calendar-b_yellow{ background:#FF6400;}
+/*calendar*/
+.aui-calendar-calendar{width:186px; height:165px;overflow:hidden; cursor:default;}
+.aui-calendar-middle{ float:left; display:inline; width:165px; height:165px; overflow:hidden;}
+
+/*today*/
+.aui-calendar-today{width:165px; height:165px; color:#FFF; background:url(imgs/calendar_icon.png) no-repeat 0 0; margin:-20px 0 0 0;}
+.aui-calendar-today p{width:100%; text-align:center;}
+.aui-calendar-today .aui-calendar-week{height:55px; line-height:60px; font-size:20px; font-weight:bold;}
+.aui-calendar-today .aui-calendar-date{ margin-top:5px;height:70px; line-height:70px; font-size:72px;font-family:Arial, Helvetica, sans-serif;}
+.aui-calendar-today .aui-calendar-month{ height:20px; line-height:20px; font-size:16px;}
+
+/*date_list*/
+.aui-calendar-date_list{ width:165px; height:165px; color:#FFF; background:url(imgs/calendar_icon.png) no-repeat -165px 0;}
+.aui-calendar-date_list .aui-calendar-d_month{ width:135px; height:40px; line-height:50px; margin-left:16px;text-align:center;}
+.aui-calendar-date_list .aui-calendar-d_month .aui-calendar-currentmonth{ width:115px; height:40px; line-height:50px; font-size:14px;}
+.aui-calendar-date_list .aui-calendar-d_month a{width:15px; height:15px; display:block; margin-top:18px;}
+.aui-calendar-date_list .aui-calendar-d_month a:hover{background:url(imgs/calendar_icon.png) no-repeat -147px -166px;}
+.aui-calendar-date_list .aui-calendar-d_week{ width:135px; height:19px; line-height:19px; margin:0 15px;border-bottom:1px solid #4F4F4F; font-size:14px; text-align:center;}
+.aui-calendar-date_list .aui-calendar-d_week span{ display:inline-block; widht:50px; height:20px; margin:0 3px; line-height:20px;}
+.aui-calendar-date_list .aui-calendar-d_date{width:135px; margin:0 15px; text-align:center;overflow:hidden;}
+.aui-calendar-date_list .aui-calendar-d_date p{ width:100%; margin:2px;}
+.aui-calendar-date_list .aui-calendar-d_date p span{ margin-right:1px; margin-bottom:1px; width:18px; height:14px; line-height:14px;font-family:Arial, Helvetica, sans-serif; font-size:11px; float:left; overflow:hidden;}
+.aui-calendar-date_list .aui-calendar-d_date p span:hover{ background:#F90;}
+.aui-calendar-date_list .aui-calendar-d_date p .aui-calendar-c_gray{ color:#777;}
+.aui-calendar-date_list .aui-calendar-d_date p .aui-calendar-c_gray:hover{background:none;}
+
+/*btn*/
+.aui-calendar-btn{ float:right; display:inline; width:21px; height:41px; background:url(imgs/calendar_icon.png) no-repeat 0 -166px; margin-top:10px; display:none;}
+.aui-calendar-btn a{width:21px; height:20px;display:block; cursor:default;}
+.aui-calendar-btn .aui-calendar-close_btn{ background:url(imgs/calendar_icon.png) no-repeat -21px -166px;}
+.aui-calendar-btn .aui-calendar-close_btn:hover{ background:url(imgs/calendar_icon.png) no-repeat -126px -166px;}
+.aui-calendar-btn .aui-calendar-open_btn{ background:url(imgs/calendar_icon.png) no-repeat -42px -166px;}
+.aui-calendar-btn .aui-calendar-open_btn:hover{ background:url(imgs/calendar_icon.png) no-repeat -84px -166px;}
+.aui-calendar-btn .aui-calendar-putaway_btn{ background:url(imgs/calendar_icon.png) no-repeat -63px -166px;}
+.aui-calendar-btn .aui-calendar-putaway_btn:hover{ background:url(imgs/calendar_icon.png) no-repeat -105px -166px;}

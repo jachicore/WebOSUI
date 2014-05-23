@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>DataGrid Plugin</title>
+<link type="text/css" rel="stylesheet" href="datagrid.css"/>
+<script type="text/javascript" src="jquery-1.7.min.js"></script>
+<script type="text/javascript" src="datagrid.js"></script>
+<script>
+	
+	
+var mydata =[ 
+		["1","2010-05-24","test","note","10.00","2111.00"],
+		["2","2010-05-25","test2","note2","20.00","320.00"],
+		["3","2007-09-01","test3","note3","30.00","430.00"],
+		["4","2007-10-04","test","note","10.00","210.00"]
+
+	];
+
+$(function(){
+
+	$.datagrid.create({
+		container:"dg-grid",
+		colTitle:[        
+            {title:'ID',sortable:true,editable:false,isHide:false, width:40, sortFunction: parseInt},  
+  
+            {title:'用户名',sortable:true,width:80,isHide:true, searchType:"text", editable:false},  
+            {title:'用户类型',sortable:true,width:80,isHide:false, editable:false},  
+           {title:'用户类型',sortable:true,width:80,isHide:false, editable:false},  
+		   {title:'用户类型',sortable:true,width:80,isHide:false, editable:false},  
+		   {title:'用户类型',sortable:true,width:80,isHide:false, editable:false},  
+        ], 
+		data:mydata,
+	})
+});
+
+</script>
+
+</head>
+
+<body>
+
+    <div id="dg-grid"></div>
+
+</body>
+</html>

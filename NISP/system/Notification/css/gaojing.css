@@ -1,0 +1,53 @@
+@charset "utf-8";
+/* CSS Document */
+ 
+body{margin:0;pading:0; font-size:12px;} 
+#tabmenu{ width:150px; background:#e9e9e9; height:450px; border-right:1px solid #c8c6c6; position:fixed;top:0; left:0;}
+
+#tabmenu ul{ list-style:none; margin:0; padding:0; box-shadow:1px 0 2px #999;}
+#tabmenu ul .li{ /*background:#eeeeee;*/background:linear-gradient(rgb(248, 248, 248), rgb(235, 235, 235)) repeat scroll 0% 0% transparent; padding:8px; border-top:1px solid #FFF; cursor:pointer;}
+#tabmenu ul .li:hover, #tabmenu ul .li:active{ /*background:#d5d4d4;*/background:linear-gradient(#a1d0e5, #6eb0ce) repeat scroll 0% 0% transparent; color: #FFF;}
+
+.alertnum{ border-radius:3px; background:#ec6100; padding:1px 5px; color:#FFF; float:right;}
+
+.container{ padding:0 0 0 0px; position:relative; margin-left:151px; margin-top:33px;}
+
+.container .control{ height:23px; /*background:#e9e9e9; */background:linear-gradient(rgb(248, 248, 248), rgb(235, 235, 235)) repeat scroll 0% 0% transparent; border-bottom:1px solid #c8c6c6; padding:5px 10px; position:fixed; top:0;left:151px; width:100%;}
+.container .control input[type="button"]{ /*background:#0068b7;*/background:linear-gradient(#0c74c4, #055fa4) repeat scroll 0% 0% transparent; color:#FFF; border:0; cursor:pointer; padding:4px 7px; border-radius:3px;}
+.container .control input[type="button"]:hover{background:#1c8be0;}
+.time{ /*background:#e9e9e9;*/background:linear-gradient(rgb(248, 248, 248), rgb(235, 235, 235)) repeat scroll 0% 0% transparent; border-top:1px solid #CCCCCC; border-bottom:1px solid #c8c6c6; padding:6px 10px;}
+
+.subcontain{ height:417px; overflow-y:scroll;}
+.gaojing{ width:100%; height:100%; padding:0px;margin:0px; list-style:none; text-align:center; color:#000;}
+.gaojing li .span3{display:block; width:30%; height:20px; float:left; margin:0px;}
+.gaojing li .span6{display:block; width:69%; height:20px; float:left;margin:0px; text-align: left;}
+.gaojing li .spanBgColor1{ font-size: 14px; font-weight: bold;border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; background:linear-gradient(rgb(248, 248, 248), rgb(235, 235, 235)) repeat scroll 0% 0% transparent; text-align: center;}
+.gaojing li .spanBgColor2{ background-color:#fff; border-bottom: 1px dashed #ddd; }
+.gaojing li .spanBgColor3{ background-color:#fff; border-bottom: 1px dashed #ddd; }
+.tab{ display:none;}
+.active{ background:linear-gradient(#a1d0e5, #6eb0ce) repeat scroll 0% 0% transparent!important;/*background:#6eb0ce!important;*/ color: #FFF;}
+
+/*start of Scroll Bar Style*/
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 5px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #BCBCBC;   
+}
+::-webkit-scrollbar-thumb:window-inactive {
+background: rgba(0,0,0,0.4); 
+}
+
+/*End of Scroll Bar Style*/

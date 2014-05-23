@@ -1,0 +1,156 @@
+<!--
+   	与上文约定变量，绑定到当前DIV中，通过$(this).data()调用该变量
+-->
+<div id="ssdcinfo" style="width:450px; height:470px; background:#FFF;overflow:hidden; font-size:12px;">
+	
+    <style type="text/css">
+	.ssdcinfo:hover{ border:1px solid #CCD3DD; background:#F2F5FC; background: -webkit-gradient(linear, 0 0, 0 bottom, from(#FAFEFF), to(#F2F5FC)); background: -moz-linear-gradient(#FAFEFF, #F2F5FC); background: linear-gradient(#FAFEFF, #F2F5FC);}
+	</style>
+
+	<p style="width:100%; height:20px; line-height:20px; margin:0; margin-top:15px;font-size:20px; font-weight:bold; text-indent:20px; color:#0033CC; overflow:hidden;">此位置已经包含同名文件。</p>
+    <p style="width:100%; height:15px; line-height:15px; margin:0; margin-top:5px;text-indent:20px; overflow:hidden;">请单击要保留的文件</p>
+	
+    <div id="ssdcinfo_replay" class="ssdcinfo" style=" width:410px; height:130px; margin:10px 18px;-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px; border:1px solid #FFF; overflow:hidden;">
+    	<p  style="height:30px; line-height:30px; margin:0; font-size:14px;color:#0033CC; text-indent:5px; overflow:hidden;">复制和替换</p>
+        <p  style="height:20px; line-height:20px; margin:0; margin-bottom:5px; color:#0033CC;text-indent:5px;overflow:hidden;">使用正在复制的文件替换目标文件夹中的文件：</p>
+        	<div style="float:left; width:60px; height:60px; margin:5px 0 0 10px; overflow:hidden;"><img class="ssdcinfo_img" src="" width="60" height="60" /></div>
+            <div style="float:right; width:330px; height:70px; text-align:left; overflow:hidden;">
+            	<p class="ssdcinfo_name" style="height:18px; line-height:18px; margin:0; overflow:hidden;"></p>
+            	<p class="ssdcinfo_path" style="height:18px; line-height:18px; margin:0;overflow:hidden; color:#0033CC;"></p>
+            	<p class="ssdcinfo_size" style="height:18px; line-height:18px; margin:0;overflow:hidden;"></p>
+            	<p class="ssdcinfo_lastModify" style="height:18px; line-height:18px; margin:0;overflow:hidden;"></p>
+            </div>
+    </div>
+    
+	<div id="ssdcinfo_undo" class="ssdcinfo" style=" width:410px; height:130px;margin:10px 18px;-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px; border:1px solid #FFF;">
+    
+    	<p  style="height:30px; line-height:30px; margin:0; font-size:14px;color:#0033CC; text-indent:5px; overflow:hidden;">不用复制</p>
+        <p  style="height:20px; line-height:20px; margin:0; margin-bottom:5px; color:#0033CC;text-indent:5px;overflow:hidden;">将不会更改任何文件。将此文件保留在目标文件夹中：</p>
+        	<div style="float:left; width:60px; height:60px; margin:5px 0 0 10px; overflow:hidden;"><img class="ssdcinfo_img" src="" width="60" height="60" /></div>
+            <div style="float:right; width:330px; height:70px; text-align:left; overflow:hidden;">
+            	<p class="ssdcinfo_name" style="height:18px; line-height:18px; margin:0; overflow:hidden;"></p>
+            	<p class="ssdcinfo_path" style="height:18px; line-height:18px; margin:0;overflow:hidden; color:#0033CC;"></p>
+            	<p class="ssdcinfo_size" style="height:18px; line-height:18px; margin:0;overflow:hidden;"></p>
+            	<p class="ssdcinfo_lastModify" style="height:18px; line-height:18px; margin:0;overflow:hidden;"></p>
+            </div>
+    </div>
+    
+    <div id="ssdcinfo_copyRename" class="ssdcinfo" style="width:410px; height:60px;margin:10px 18px;-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px; border:1px solid #FFF;">
+    	<p style="height:30px; line-height:30px; margin:0; font-size:14px;color:#0033CC; text-indent:5px; overflow:hidden;">复制,但保留着两个文件</p>
+        <p class="ssdcinfo_rename_lable" style="height:20px; line-height:20px; margin:0; margin-bottom:5px; color:#0033CC;text-indent:5px;overflow:hidden;"></p>
+    
+    </div>
+
+   <div id="ssdcinfo_cancel" class="ssdcinfo" style="width:410px; height:40px; line-height:40px; font-size:14px; margin:0 18px;-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px; text-align:center; border:1px solid #FFF;background:#F0F0F0;background: -webkit-gradient(linear, 0 0, 0 bottom, from(#FCFCFC), to(#F0F0F0));background: -moz-linear-gradient(#FCFCFC, #F0F0F0);background: linear-gradient(#FCFCFC, #F0F0F0);">取消</div>
+
+	<script>
+		
+		loop();
+		
+		// 由于是异步传输, 所以写一个循环去判断$("#ssdcinfo").data("params")是否已被成功复制
+		
+		function loop(){
+			console.log($("#ssdcinfo").data("params"));
+			if(typeof($("#ssdcinfo").data("params"))!='undefined'){
+				switch($("#ssdcinfo").data("params").type){
+					case 'desktopCopy': 
+					
+							var currentRoot = $.aos.desktop.currentDesktop.root;
+							
+							$(".ssdcinfo_img").attr("src",$.aos.desktop.copyCache[1].icon.img);
+							$(".ssdcinfo_name").html($.aos.desktop.copyCache[1].name);
+							$(".ssdcinfo_path").html($.aos.desktop.copyCache[1].path);
+							$(".ssdcinfo_size").html($.aos.desktop.copyCache[1].size+"字节");
+							$(".ssdcinfo_lastModify").html("修改日期："+$.aos.desktop.copyCache[1].lastModified);
+							$(".ssdcinfo_rename_lable").html("正在复制的文件将重命名为\""+$("#ssdcinfo").data("params").name+"\"");
+					
+							$("#ssdcinfo_replay").click(function(){
+								alert("from: "+$.aos.desktop.copyCache[1].path+" to: "+$.aos.desktop.currentDesktop.root);
+								$.aos.desktop.copyCache[0].remove();
+								$.aos.fs.cp($.aos.desktop.copyCache[1].path, $.aos.desktop.currentDesktop.root);
+								var node = new $.aos.ui.UINode($.aos.fs.mapWith($.aos.desktop.currentDesktop.root+"/"+$.aos.desktop.copyCache[1].name));
+								$("#shortcut_desk").append($.aos.desktop.currentDesktop.addShortcut(node));
+								$.aos.desktop.copyCache = new Array();
+								$("#ssdcinfo").data("params").lightbox.del();
+							});
+							
+							$("#ssdcinfo_undo").click(function(){
+								$.aos.desktop.copyCache = new Array();
+								$("#ssdcinfo").data("params").lightbox.del();
+							});
+							
+							$("#ssdcinfo_copyRename").click(function(){
+								var name = $("#ssdcinfo").data("params").name;
+								var path = $("#ssdcinfo").data("params").path;
+								//alert("newName: "+name+" newPath: "+path);
+								
+								$.aos.fs.cp($.aos.desktop.copyCache[1].path, path);
+								
+								var node = new $.aos.ui.UINode($.aos.fs.mapWith(path));
+								$("#shortcut_desk").append($.aos.desktop.currentDesktop.addShortcut(node));
+								$.aos.desktop.copyCache = new Array();
+								$("#ssdcinfo").data("params").lightbox.del();
+							});
+							
+							$("#ssdcinfo_cancel").click(function(){
+								$("#ssdcinfo").data("params").lightbox.del();
+							});
+						
+						break
+					case 'desktopCut':
+							$(".ssdcinfo_img").attr("src",$.aos.desktop.cutCache[1].icon.img);
+							$(".ssdcinfo_name").html($.aos.desktop.cutCache[1].name);
+							$(".ssdcinfo_path").html($.aos.desktop.cutCache[1].path);
+							$(".ssdcinfo_size").html($.aos.desktop.cutCache[1].size+"字节");
+							$(".ssdcinfo_lastModify").html("修改日期："+$.aos.desktop.cutCache[1].lastModified);
+							$(".ssdcinfo_rename_lable").html("正在复制的文件将重命名为\""+$("#ssdcinfo").data("params").name+"\"");
+					
+							$("#ssdcinfo_replay").click(function(){
+								//alert("from: "+$.aos.desktop.cutCache[1].path+" to: "+$.aos.desktop.currentDesktop.root);
+								$.aos.desktop.cutCache[0].remove();
+								$.aos.fs.mv($.aos.desktop.cutCache[1].path, $.aos.desktop.currentDesktop.root);
+								var node = new $.aos.ui.UINode($.aos.fs.mapWith($.aos.desktop.currentDesktop.root+"/"+$.aos.desktop.cutCache[1].name));
+								$("#shortcut_desk").append($.aos.desktop.currentDesktop.addShortcut(node));
+								$.aos.desktop.cutCache = new Array();
+								$("#ssdcinfo").data("params").lightbox.del();
+							});
+							
+							$("#ssdcinfo_undo").click(function(){
+								$.aos.desktop.cutCache[0].css('opacity', 1);
+								$.aos.desktop.cutCache = new Array();
+								$("#ssdcinfo").data("params").lightbox.del();
+							});
+							
+							$("#ssdcinfo_copyRename").click(function(){
+								var name = $("#ssdcinfo").data("params").name;
+								var path = $("#ssdcinfo").data("params").path;
+								alert("newName: "+name+" newPath: "+path);
+								$.aos.desktop.cutCache[0].css('opacity', 1);
+								
+								$.aos.fs.cp($.aos.desktop.cutCache[1].path, path);
+								
+								var node = new $.aos.ui.UINode($.aos.fs.mapWith(path));
+								$("#shortcut_desk").append($.aos.desktop.currentDesktop.addShortcut(node));
+								$.aos.desktop.cutCache = new Array();
+								$("#ssdcinfo").data("params").lightbox.del();
+							});
+							
+							$("#ssdcinfo_cancel").click(function(){
+								$.aos.desktop.cutCache[0].css('opacity', 1);
+								$("#ssdcinfo").data("params").lightbox.del();
+							});
+							
+						break
+					default :
+						$("#ssdcinfo").data("params").lightbox.del();
+				}
+			}else{
+				setTimeout("loop()", 500);	
+			}
+		}
+		
+		
+		
+    </script>
+
+</div>

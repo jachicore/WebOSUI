@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+*{ margin:0; padding:0; font:normal 12px/22px Arial, Helvetica, sans-serif;}
+p, ul, li, dt, dd, a, img {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.wrap {
+	width:100%;
+	color:#666;
+	text-align:center;
+}
+.tab { width:394px; margin:0 auto; text-align:center; }
+.tab .t_tit { width:394px; float:left; }
+.tab .t_tit span { 
+	padding:2px 15px; 
+	display:inline; 
+	border:1px solid #ccc;
+	border-bottom:none; 
+	margin-right:-1px; 
+	float:left;
+	background:#fff;
+	cursor:pointer;
+	border-radius:4px;
+	box-shadow:inset 1px 1px 1px #fff;
+	margin-bottom:-5px;
+}
+.tab .t_tit .t1 { background:#fff;}
+
+.tab .t_con { }
+.tcon1,.tcon2 { 
+	border:1px solid #ccc; 
+	border-radius:4px;
+	box-shadow:inset 1px 1px 1px #fff;
+	width:90%; 
+	padding:5%; 
+	float:left; 
+	text-align:left;
+	background:#f0f0f0;
+	display:none;
+}
+.tcon1 img { 
+	width:48px; 
+	height:48px;
+	padding:5px;
+	float:left; 
+	display:block; 
+	border:1px solid #ccc;
+	box-shadow:0 2px 1px rgba(190 190 190 0.1); 
+	border-radius:6px;
+}
+
+.tcon1 ul { width:280px; height:300px; float:right; }
+.tcon1 li { width:280px; padding-bottom:10px; float:left; }
+.tcon1 li span { width:80px; float:left; cursor:pointer; }
+.tcon1 li p { float:left;}
+
+.tcon2 ul { }
+.tcon2 li { width:100%; float:left; padding-bottom:10px; }
+.tcon2 li span { width:80px; float:left; }
+.tcon2 li p { float:left;}
+
+.btnbar { width:100%; display:block; padding:10px 0; text-align:center; float:left;}
+.btnbar input[type="button"] { margin-right:10px; text-align:center; }
+
+.hide { display:none;}
+</style>
+<script src="jquery-1.6.2.min.js"></script>
+<script src="../../../js/ajs/utils/url/jquery.url.js"></script>
+<script>
+
+$(function(){
+	$(".tcon1").show();
+	$('.t_tit > span').eq(0).css("background","#f0f0f0");
+	
+	$('.t_tit > span').click(function(){
+		$(".contents").hide();
+		$(this).css("background","#f0f0f0");
+		$(this).siblings().css("background","#fff");
+		$("#"+$(this).attr('name')).show();	
+	});
+	var path = $.url().param('path');
+	console.log(path);
+	var node = parent.$.aos.ui.UINode(parent.$.aos.fs.mapWith(path));
+	
+	console.log(node);
+	
+	$("#_icon").attr("src","../../../"+node.icon.img);
+	$("#_name").html(node.name);
+	$("#_type").html(node.type);
+	$("#_size").html(node.size);
+	$("#_path").html(node.path);
+	$("#lastModify").html(node.lastModified);
+	
+	$("#_owner").html(parent.$.aos.users.current);
+	
+})
+
+
+</script>
+</head>
+
+<body>
+<div class="wrap">
+  <div class="tab">
+  <div class="t_tit">
+  	<span name='basic'>Basic</span><span name='permissions'>Permissions</span>
+  </div>
+  <div class="t_con">
+      <div id="basic" class="contents tcon1">
+          <img id="_icon" src="" />
+          <ul>
+          <li><span>Name:</span><p id="_name"></p></li>
+          <li><span>Type:</span><p id="_type"></p></li>
+          <li><span>Size:</span><p id="_size"></p></li>
+          <li><span>Location:</span><p id="_path"></p></li>
+          <li><span>Modified:</span><p id="lastModify"></p></li>
+          </ul>
+      </div>
+      
+      <div id="permissions" class="contents tcon2">
+          <ul>
+          <li><span>owner:</span><p id="_owner"></p></li>
+          <li><span>Access:</span><p><option>Read and Write</option><select><option>None</option><option>Read-only</option></select></span></p></li>
+          <li><span>Group:</span><p><option>Read and Write</option><select><option>None</option><option>Read-only</option></select></span></p></li>
+          <li>Others</li>
+          <li><span>Access:</span><p><option>Read and Write</option><select><option>None</option><option>Read-only</option></select></span></p></li>
+          <li><span>Execute:</span><p><input type="checkbox" checked="checked"/>Aallow executing file as program</p></li>
+          </ul>
+      </div>
+  </div>
+
+  </div>
+</div>
+
+
+
+</body>
+</html>

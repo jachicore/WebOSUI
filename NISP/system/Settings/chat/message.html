@@ -1,0 +1,363 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户基本信息</title>
+<style type="text/css">
+* {
+	margin:0 auto;
+	padding:0;
+	font:normal 12px/24px Arial, "宋体";
+}
+p, ul, li, dt, dd, a, img {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.wrap {
+	width:100%;
+	text-align:left;
+	color:#666;
+	margin-top:20px;
+}
+.nbox {
+	width:440px;
+	text-align:center;
+	opacity:0.85;
+	filter:alpha(opacity=85);
+}
+.titbar {
+	width:320px;
+	height:24px;
+	border:1px solid #d9d9d9;
+	border-bottom:0;
+	padding:0 5px;
+	background:url(images/bg_titBar_active.png) repeat-x left;
+	margin-left:107px;
+	float:left;
+	position:fixed;
+	bottom:0px;
+}
+.titbar h1 {
+	float:left;
+	line-height:24px;
+}
+.ico_min {
+	width:12px;
+	height:12px;
+	cursor:pointer;
+	float:right;
+	margin:10px 5px 0 0;
+	background:url(images/bg_thems.gif) no-repeat -288px top;
+}
+.ico_colse {
+	width:12px;
+	height:12px;
+	display:block;
+	cursor:pointer;
+	float:right;
+	margin-top:8px;
+	background:url(images/bg_thems.gif) no-repeat -288px -14px;
+}
+/* 对话内容  */
+.info {
+	width:100%; display:block; float:left; position:fixed; bottom:24px;
+}
+.info .prev {
+	width:106px;
+	height:8px;
+	display:block;
+	cursor:pointer;
+	text-align:center;
+	float:left;
+	margin-top:2px;
+	/*position:relative;top:2px;z-index:1100;*/
+	background:url(images/bg_thems.gif) no-repeat -240px -35px;
+}
+.info .next {
+	width:106px;
+	height:8px;
+	display:block;
+	cursor:pointer;
+	text-align:center;
+	float:left;
+	/*position:relative;z-index:1100;top:238px;_top:2px;*/
+	background:url(images/bg_thems.gif) no-repeat -240px -57px;
+}
+/* tag部分 */
+.info .left_tag {
+	width:106px;
+	background:#f3f3f3;
+	border:1px solid #d9d9d9;
+	border-right:0;
+	float:left;
+	padding-bottom:10px;
+	_padding-bottom:0;
+}
+.info .left_tag ul {
+	float:left;
+	height:240px;
+	overflow:hidden;
+}
+.info .left_tag li {
+	width:98px;
+	height:34px;
+	line-height:34px;
+	float:right;
+}
+.info .left_tag .on_sel {
+	background:url(images/bg_thems.gif) no-repeat -202px -75px;
+	cursor:pointer;
+}
+.info .left_tag .no_sel {
+	cursor:pointer;
+}
+/* 右边内容 */
+.info .tag_con {
+	width:310px;
+	border:1px solid #d9d9d9;
+	background:#f3f3f3;
+	padding:10px;
+	float:left;
+}
+.info .tag_con ul {
+	width:100%;
+	height:200px;
+	overflow-y:auto;
+	overflow-x:hidden;
+	padding-bottom:5px;
+	margin-bottom:10px;
+	border-bottom:1px double #ccc;
+	float:left;
+}
+.info .tag_con li {
+	width:100%;
+	display:block;
+	float:left;
+	padding:4px 0;
+}
+.info .tag_con li span {
+	line-height:16px;
+}
+.info .tag_con .say1 {
+	border:1px solid #8fb9d0;
+	padding:4px;
+	text-align:left;
+	float:left;
+	margin-left:10px;
+	display:inline;
+	background:url(images/talk1.png) repeat-x left top;
+}
+.info .tag_con .say1 span,.info .tag_con .say2 span { color:#888; padding-right:10px;}
+.info .tag_con .say2 {
+	border:1px solid #bdbcbd;
+	padding:4px;
+	text-align:right;
+	float:right;
+	margin-right:10px;
+	_margin-right:27px;
+	display:inline;
+	background:url(images/talk2.png) repeat-x left top;
+}
+.info .tag_con .fdot1 {
+	position:relative;
+}
+.info .tag_con .fdot2 {
+	position:relative;
+}
+.info .tag_con .ico1 {
+	width:12px;
+	height:12px;
+	background:url(images/bg_thems.gif) no-repeat left top;
+	position:absolute;
+	z-index:100;
+	left:1px;
+	top:16px;
+}
+.info .tag_con .ico2 {
+	width:12px;
+	height:12px;
+	background:url(images/bg_thems.gif) no-repeat -22px top;
+	position:absolute;
+	z-index:100;
+	left:96.1%;
+	top:18px;
+}
+.info .tag_con .ask {
+	width:100%;
+	height:67px;
+	float:left;
+	position:relative;
+}
+.info .tag_con .ask textarea {
+	width:240px;
+	height:57px;
+	border:0;
+	float:left;
+	padding:5px;
+	background:none;
+	text-align:left;
+}
+.info .tag_con .ask .mbg {
+	width:250px;
+	height:67px;
+	float:left;
+	background:url(images/textarea_mbg.png) repeat-x left top;
+}
+.info .tag_con .ask .lbg {
+	width:5px;
+	height:67px;
+	line-height:67px;
+	position:absolute;
+	z-index:888;
+	top:0;
+	left:0;
+	background:url(images/bg_thems.gif) no-repeat -291px -233px;
+}
+.info .tag_con .ask .rbg {
+	width:30px;
+	height:67px;
+	position:absolute;
+	z-index:999;
+	top:0;
+	left:232px;
+	background:url(images/bg_thems.gif) no-repeat -282px -159px;
+}
+.info .tag_con .ask .btn_ask1 {
+	width:54px;
+	height:67px;
+	float:left;
+	border:0;
+	background:url(images/bg_thems.gif) no-repeat left -75px;
+}
+.info .tag_con .ask .btn_ask2 {
+	width:54px;
+	height:67px;
+	float:left;
+	border:0;
+	background:url(images/bg_thems.gif) no-repeat left -148px;
+}
+</style>
+<script type="text/javascript" src="js/jquery-1.7.min.js"></script>
+<script>
+$(document).ready(function(){
+	    //左侧滚动人物菜单	
+		$('.left_tag>ul>li').css('display','block');
+		var allli = $('.left_tag>ul>li')
+		var count = 0;
+		$('.next').click(function(){
+			if(count <= allli.length-7){
+				$('.left_tag>ul>li').eq(count).css('display','none');
+				count++;
+			}else{
+			}
+		});
+		
+		$('.prev').click(function(){
+			if(count >= 1){
+				//alert(count)
+				$('.left_tag>ul>li').eq(count-1).css('display','block');
+				count--;
+			}else{
+			}
+		});
+		$('.left_tag>ul>li').click(function(){
+			$(this).css('background','#bfdfff').siblings().css('background','none')	
+		});
+
+			
+		//*******
+		$(".info").hide();
+			$(".ico_min").hide();
+	
+		$(".titbar").toggle(function(){
+			$(".info").show();
+			$(".ico_min").show();
+			$(".titbar").css('cursor','pointer');
+		},function(){
+			$(".info").hide();
+			$(".ico_min").hide();
+		});
+	
+		
+		
+		$(".ico_colse").click(function(){
+			$('.nbox').hide();
+		});	
+		$(".ico_min").click(function(){
+			$('.info').hide();
+		});		
+	
+		
+});
+
+
+
+</script>
+</head>
+
+<body>
+<div class="wrap">
+  <div class="nbox">
+    
+    <div class="info">
+      <div class="left_tag"> <span class="prev"></span>
+        <ul>
+          <li class="no_sel">Mark</li>
+          <li class="on_sel">Hill</li>
+          <li class="no_sel">Bill</li>
+          <li class="no_sel">Vincent</li>
+          <li class="no_sel">William</li>
+          <li class="no_sel">Joan</li>
+        </ul>
+        <span class="next"></span> </div>
+      <div class="tag_con">
+        <ul class="con0">
+          <li>
+            <div class="say1"><span class="data">2012-7-12</span><span class="time">14:25</span>
+              <p>Hi</p>
+            </div>
+            <div class="fdot1"><span class="ico1"></span></div>
+          </li>
+          <li>
+            <div class="say2"><span class="data">2012-7-12</span><span class="time">14:25</span>
+              <p>hi</p>
+            </div>
+            <div class="fdot2"><span class="ico2"></span></div>
+          </li>
+          <li>
+            <div class="say1"><span class="data">2012-7-12</span><span class="time">14:25</span>
+              <p>...</p>
+            </div>
+            <div class="fdot1"><span class="ico1"></span></div>
+          </li>
+          <li>
+            <div class="say1"><span class="data">2012-7-12</span><span class="time">14:25</span>
+              <p>...</p>
+            </div>
+            <div class="fdot1"><span class="ico1"></span></div>
+          </li>
+          <li>
+            <div class="say2"><span class="data">2012-7-12</span><span class="time">14:25</span>
+              <p>...</p>
+            </div>
+          </li>
+        </ul>
+        <div class="ask"> <span class="lbg"></span><span class="mbg">
+          <textarea name="textarea" cols="" rows=""></textarea>
+          </span><span class="rbg"></span>
+          <input type="submit" class="btn_ask1"  onmouseover="this.className='btn_ask2'" onmousedown="this.className='btn_ask1'" onmouseout="this.className='btn_ask1'" value=""/>
+        </div>
+      </div>
+    </div>
+    
+    <div class="titbar">
+      <h1>您正在与<b>Hill</b>对话中...</h1>
+      <span class="ico_colse"></span><span class="ico_min"></span>
+    </div>
+    
+  </div>
+</div>
+<div>
+</body>
+</html>

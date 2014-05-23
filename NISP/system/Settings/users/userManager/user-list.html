@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户组应用管理</title>
+
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link type="text/css" rel="stylesheet" href="css/mm-template.css" />
+<link rel="stylesheet" type="text/css" href="css/kkpager.css" />
+<script type="text/javascript" src="js/jquery-1.7.min.js" ></script>
+<script type="text/javascript" src="js/group_db.js"></script>
+<script type="text/javascript" src="js/addUser.js"></script>
+<script type="text/javascript" src="js/kkpager.js"></script>
+
+<script type="text/javascript">
+$(function(){
+    registEvent();
+});
+</script>
+</head>
+
+<body style="margin:30px;">
+
+<!-- start mm-dialog -->
+<div class="mm-dialog">
+  <!-- <div class="mm-title"> <span class="mm-dialog-caption">批量添加用户</span> </div> -->
+  <!-- end mm-title -->
+  <div class="mm-content">
+    <div class="mm-left-tree">
+      <h2>已有用户列表</h2>
+<!--        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search" id="search-value">
+          </div>
+          <button type="button" class="btn btn-default" id="search">Search</button>
+        </form> -->
+      <hr style="clear: both;margin: 10px 0;" />
+       <p style="margin:0px 0 0 20px;"><label class="name" style="display:inline-block; width:40%;">用户名</label> <label class="group" style="display:inline-block; width:40%;">所属组</label> </p> 
+       <div id="_currentAddedUserList">
+       		
+       </div>
+    <!--    <p>已存在用户列表：</p> -->
+       <div id="_systemUserList">
+       		
+       </div>
+       <!-- 分页效果 -->
+       <div id="kkpager"></div>
+       <!-- 编辑用户 -->
+        <div class="edit-user">
+          <button type="button" class="btn btn-default" id="add-user">添加用户</button>
+          <button type="button" class="btn btn-default" id="change-user">修改用户分组</button>
+          <button type="button" class="btn btn-default" id="delete-user">删除用户</button>
+        </div>
+      
+    </div>
+    <div class="mm-right-tree">
+      <h2>添加用户</h2>
+      <p>用户名：<input id="_name" type='text' /></p>
+      <p>
+        所属组：
+       <!--  <select id="_group" >
+        </select> -->
+        <span id="_group"></span>
+       <!--  <input type="checkbox" value="group0" />group0<input type="checkbox" value="group1" />group1<input type="checkbox" value="group2" />group2 -->
+      </p>
+      <p id="add-delete">
+        <!-- <input type="button" class="mm-button addUser" value="添加" /> -->
+        <button type="button" class="btn btn-default mm-button addUser">添加</button>
+        <!-- <button type="button" class="btn btn-default">取消</button> -->
+      </p>
+      <p id="change-delete" style="display:none;">
+         <button type="button" class="btn btn-default" id="change-button">修改</button>
+      </p>
+    </div>
+    <!-- end mm-right-tree --> 
+  </div>
+  <!-- end mm-content -->
+ <!--  <div class="mm-dialog-button">
+    <input id="groupAdd" type="submit" class="mm-button mm-button-ok mm-button-save" value="确定" />
+  </div> -->
+  
+  <!-- end mm-dialog-button --> 
+</div>
+<!-- end mm-dialog -->
+
+<script type="text/javascript">
+function getParameter(name) { 
+  var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); 
+  var r = window.location.search.substr(1).match(reg); 
+  if (r!=null) return unescape(r[2]); return null;
+}
+
+//init
+$(function(){
+  var list_page = 5;
+  var list = $('#_systemUserList p');
+  var list_length = $('#_systemUserList p').length;
+  var list_div = list_length / list_page;
+  list_div = Math.ceil(list_div);
+  var array = new Array();
+  // console.log(array);
+  var t = 1;
+  for(var i = 0;i < list_div;i++) {
+    array[i] = new Array();
+    for(var j = t;j < list_length+1;j++) {
+      t++;
+      array[i].push(list[j-1]);
+      if(j % list_page == 0) break;
+    }
+  }
+
+  var totalPage = list_div;
+  var totalRecords = list_length;
+  var pageNo = getParameter('pno');
+  if(!pageNo){
+    pageNo = 1;
+  }
+  //初始化分页控件
+  //有些参数是可选的，比如lang，若不传有默认值
+  kkpager.init({
+    pno : pageNo,
+    //总页码
+    total : totalPage,
+    //总数据条数
+    totalRecords : totalRecords,
+    //链接前部
+    hrefFormer : '',
+    //链接尾部
+    hrefLatter : '',
+    getLink : function(n){
+      return this.hrefFormer + this.hrefLatter + "?pno="+n;
+    },
+    lang : {
+      prePageText : '上一页',
+      nextPageText : '下一页',
+      totalPageBeforeText : '共',
+      totalPageAfterText : '页',
+      totalRecordsAfterText : '条数据',
+      gopageBeforeText : '转到',
+      gopageButtonOkText : '确定',
+      gopageAfterText : '页',
+      buttonTipBeforeText : '第',
+      buttonTipAfterText : '页'
+    }
+  });
+  //生成
+  kkpager.generPageHtml();
+
+  var curr = $('.curr').text() - 1;
+  $('#_systemUserList').html("");
+  initData(curr);
+  function initData(curr) {
+    var list_data = "";
+    for(var i = 0;i < array[curr].length;i++) {
+      $('#_systemUserList').append(array[curr][i]);
+    }
+  } 
+});
+</script>
+</body>
+</html>

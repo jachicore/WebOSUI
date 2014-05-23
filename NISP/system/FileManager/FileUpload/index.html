@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>新建页面</title>
+
+<link rel="stylesheet" href="css/uploadify.css" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.7.min.js"></script>
+<script type="text/javascript" src="js/jquery.uploadify-3.1.min.js"></script>
+<script type="text/javascript" src="../../../js/ajs/utils/url/jquery.url.js"></script>
+
+</head>
+<script type="text/javascript">
+var path = $.url().param('_path');
+var type = $.url().param('_type');
+  $(function()
+  {
+	  //console.log(path);
+	  parent.$.aos.lightbox.uploaded = false;
+	  parent.$.aos.lightbox.uploadedPath = '';
+	  path = top.Base64.encode("aos://"+path);
+	  $("#file_upload").uploadify({
+		  	'buttonText' : '选择文件...',
+			'formData' : {file:path},
+			'swf'      : 'css/uploadify.swf',
+			'uploader' : '/aas/resource/upload',
+		    'onUploadSuccess' : function(file, data, response) {
+				  //console.log(file);
+				  if(typeof(type)=='undefined'){
+				  	alert("文件已上传,请刷新显示文件");
+				  }
+				 // // console.log(response);
+				 // parent.$.aos.lightbox.uploadedPath = top.JSON.parse(data)[0];
+				  parent.$.aos.lightbox.uploaded = true;
+				 // parent.$.aos.lightbox.del();
+			 }  
+		});
+  });
+  </script>
+<body>
+    <input type='file' size='8' class='btnfile_on' name='file_upload' id='file_upload' />
+</body>
+</html>

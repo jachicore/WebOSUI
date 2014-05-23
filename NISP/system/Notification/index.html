@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv=Page-Enter content=revealTrans(Duration=3,Transition=3)>
+<!--<meta http-equiv="refresh" content="30" />-->
+<meta charset="utf-8">
+<title>gaojing</title>
+<script src="js/lang/jquery.min.js"></script>
+<script src="js/logic/system.js"></script>
+<link href="css/gaojing.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div id="tabmenu">
+	<ul>
+    	<!--<li id="tab1" class="li">集中网管告警通知<span id="cnmpNotifi" title="集中网管告警通知" path="/systemalarm/cnmp" class="alertnum">0</span></li>
+        <li id="tab2" class="li">ByPass监控告警通知<span id="bypassNotifi" title="ByPass监控告警通知" path="/systemalarm/bypass" class="alertnum">0</span></li>
+        <li id="tab3" class="li">系统通知<span id="systemNotifi" title="系统通知" path="/systemalarm/systemnotifi" class="alertnum">0</span></li>-->
+    </ul>
+</div>
+<div class="container">
+	<div class="control">
+    	<span style=" position:fixed; top:4px; left:160px;">
+            <!--<input type="button" onClick="getAll()" value="查看所有"/>-->
+            <!--<input type="button" onClick="refreshs()" value="刷新"/>-->
+        </span>
+        <span style=" position:fixed; top:4px; right:10px;">
+            <!--<input type="button" onClick="del()" value="删除选定"/>-->
+            <input id="clearAll" type="button" onClick="delAll()" value="清空"/>
+    	</span>
+    </div>
+    
+    <div class="subcontain">
+    	<div id="tab1" class="log">
+        	<div class="alertbox">
+                <div class="time">最近30分钟</div>
+                <div class="alerts five">
+					<!--cnmp告警日志最近10分钟-->
+                    <div style=" overflow:hidden">
+                    	<ul class="gaojing">
+                            <!--<li style="font-size:18px;"><span class="span3 spanBgColor1">通知时间</span><span class="span6 spanBgColor1">告警内容</span></li>
+                            <li><span class="span3 spanBgColor2">2013-08-21 15:03:25</span><span class="span6 spanBgColor2">ccccccccc</span></li>
+                            <li><span class="span3 spanBgColor3">2013-08-21 15:03:25</span><span class="span6 spanBgColor3">ccccccccc</span></li>
+                            <li><span class="span3 spanBgColor2">2013-08-21 15:03:25</span><span class="span6 spanBgColor2">ccccccccc</span></li>
+                            <li><span class="span3 spanBgColor3">2013-08-21 15:03:25</span><span class="span6 spanBgColor3">ccccccccc</span></li>
+                            <li><span class="span3 spanBgColor2">2013-08-21 15:03:25</span><span class="span6 spanBgColor2">ccccccccc</span></li>
+                            <li><span class="span3 spanBgColor3">2013-08-21 15:03:25</span><span class="span6 spanBgColor3">ccccccccc</span></li>
+                            <li><span class="span3 spanBgColor2">2013-08-21 15:03:25</span><span class="span6 spanBgColor2">ccccccccc</span></li>
+                            <li><span class="span3 spanBgColor3">2013-08-21 15:03:25</span><span class="span6 spanBgColor3">ccccccccc</span></li>-->
+                    	</ul>
+                    </div>
+                </div>
+             </div>
+             <div class="alertbox">
+                <div class="time">其它</div>
+                <div class="alerts ten">
+                	<!--cnmp告警日志最近10分钟-->
+                    <div style=" overflow:hidden">
+                    	<ul class="gaojing">
+                            <!--<li style="font-size:18px;"><span class="span3 spanBgColor1">通知时间</span><span class="span6 spanBgColor1">告警内容</span></li>
+                            <li><span class="span3 spanBgColor2">2013-08-21 15:03:25</span><span class="span6 spanBgColor2">ccccccccc</span></li>
+                            <li><span class="span3 spanBgColor3">2013-08-21 15:03:25</span><span class="span6 spanBgColor3">ccccccccc</span></li>
+                            <li><span class="span3 spanBgColor2">2013-08-21 15:03:25</span><span class="span6 spanBgColor2">ccccccccc</span></li>
+                            <li><span class="span3 spanBgColor3">2013-08-21 15:03:25</span><span class="span6 spanBgColor3">ccccccccc</span></li>-->
+                    	</ul>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </div><!--end subcontain-->    
+</div>
+</body>
+</html>

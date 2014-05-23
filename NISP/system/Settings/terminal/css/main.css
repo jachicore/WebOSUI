@@ -1,0 +1,63 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*The public*/
+*{ margin:0; padding:0; list-style:none;font:12px "宋体", Arial, Helvetica, sans-serif;}
+ul,li,dl,dd,dt{ list-style:none;}
+/*link*/
+a{color:#077DB6; text-decoration:underline;}
+a:hover{ color:#F00; text-decoration:underline;}
+
+/*float*/
+.f_l{ float:left; display:inline;}
+.f_r{ float:right; display:inline;}
+/*clear*/
+.clear{ clear:both;}
+.sty_none{ display:none;}
+
+.sidebar{ float:left; width:15%; height:610px; overflow:auto}
+.r_con { width:100%; float:left;}
+.comply_textarea { width:98%;padding:1%; background:#fafafa;}
+.comply_textarea textarea { width:99%; height:240px; margin:0 auto; border:1px solid #fff; background:#333;padding:5px; color:#ebebeb; line-height:24px;
+box-shadow: #ededed 0px 0px 3px; /* border-radius:6px; */
+}
+.tab1 { background:#fff; }
+.tab2 { background:#f1f1f1; }
+.tcon1 { line-height:24px;}
+.dblock { display:block;}
+.dnone { display:none}
+
+
+
+.r_main{ height:auto; width:98%; margin:1%; border:1px solid #8B8B8B; border-top:5px solid #8B8B8B; overflow:hidden;}
+.title{ height:35px; line-height:35px; text-indent:10px; width:100%;border-bottom:1px solid #8B8B8B; overflow:hidden; 
+background:url(images/title-bg.png) repeat-x;}
+.toolbar{ height:35px; line-height:35px; text-indent:10px; width:100%;border-bottom:1px solid #8B8B8B; overflow:hidden; 
+background:url(images/title-bg.png) 0 -35px repeat-x;}
+.toolbar div span{ margin-right:2px; line-height:26px;}
+.toolbar .btn_bg{
+	float:left; padding:0px; text-indent:5px; line-height:26px; height:26px; margin:3px 4px;border:1px solid #BBBBBB;
+	border-radius:2px;
+	box-shadow: #BBB 0px 1px 2px; 
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#EDEDED), to(#D0D0D0));
+	background: -moz-linear-gradient(#EDEDED, #D0D0D0);
+	background: linear-gradient(#EDEDED, #D0D0D0);
+	cursor:pointer;
+}
+.toolbar .btn_bg select{height:20px; line-height:20px; margin-top:3px;}
+
+.toolbar .btn_bg2 {
+ 	float:left; padding:0 8px; text-indent:5px; line-height:26px; height:26px; margin:3px 6px;border:1px solid #BBBBBB;
+	border-radius:2px;
+	box-shadow: #BBB 0px 1px 2px; 
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#EDEDED), to(#D0D0D0));
+	background: -moz-linear-gradient(#EDEDED, #D0D0D0);
+	background: linear-gradient(#EDEDED, #D0D0D0);
+	cursor:pointer;
+}
+.toolbar .btn_bg2:hover{
+	color:#FFF;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#999), to(#666));
+	background: -moz-linear-gradient(#999, #666);
+	background: linear-gradient(#999, #666);
+}

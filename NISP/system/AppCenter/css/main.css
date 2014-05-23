@@ -1,0 +1,18 @@
+/*reset.css*/
+.wrapper {}
+/*a {color:#333; font-weight:bold; text-decoration:none;}
+a:hover {text-decoration: none;}*/
+.app-center {float: left; width: 30%;background: #e8e8e8;min-height: 300px;}
+.app-add {float: right;width: 70%;padding-left: 20px;padding-right: 20px;margin-top: 10px;}
+
+.app-list dl dd {background: #fff;}
+.app-list dl dt {height: 40px;line-height: 30px;border-bottom: 1px solid #ccc;line-height: 40px;padding-left: 15px;}
+.app-list dl dt span{padding-left: 5px;cursor: pointer;}
+.app-list dl dt span img {float:right;max-width: 20px;max-height: 12px;margin-top: 10px;margin-right: 10px;}
+.add-delete {margin-left: 20px;margin-bottom: 20px;}
+.btn {margin-right: 10px;}
+.list-group {
+	margin-bottom: 0;
+	line-height: 14px;
+	font-size: 12px;
+}

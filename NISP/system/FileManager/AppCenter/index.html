@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>应用程序中心</title>
+	<style>
+		.app-list dl dd {background: #fff;}
+		.app-list dl dt {height: 30px;line-height: 30px;border-bottom: 1px solid #ccc;}
+		.app-list dl dt a {padding-left: 30px;margin-left: 10px;font-weight: bold;}
+		.app-list dl ul {margin-left: 20px;}
+		.app-list dl ul li {line-height: 25px;}
+
+	</style>
+	<script src="js/lang/jquery-1.7.min.js"></script>
+	<script src="js/main.js"></script>
+</head>
+<body>
+<div class="wrapper">
+	<h2>应用程序中心</h2>
+	<div class="app-center">
+		<div class="add-delete">
+			<input type="button" value="增加" />
+			<input type="button" value="删除" />
+		</div>
+		<div class="app-list">
+			<dl>
+				<dt><a href="#">资源管理</a></dt>
+				<dd>
+					<ul>
+						<li><a href="#">已审核</a></li>
+						<li><a href="#">未审核</a></li>
+					</ul>
+				</dd>
+				<dt><a href="#">用户管理</a></dt>
+				<dd>
+					<ul>
+						<li><a href="#">编辑用户</a></li>
+						<li><a href="#">添加用户</a></li>
+						<li><a href="#">删除用户</a></li>
+					</ul>
+				</dd>
+				<dt><a href="#">发布内容</a></dt>
+				<dd>
+					<ul>
+						<li><a href="#">上传文件</a></li>
+						<li><a href="#">发布文章</a></li>
+					</ul>
+				</dd>
+			</dl>
+		</div>
+	</div>
+	<div class="app-add"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>index</title>
+<link type="text/css" rel="stylesheet" href="css/main.css"/>
+<script type="text/javascript" src="js/lang/jquery-1.7.min.js"></script>
+<script type="text/javascript">
+var systemConfig = JSON.parse("{}");
+//var systemConfig = JSON.parse(parent.$.aos.reg.getValue(parent.$.aos.users.current+"_sysconfig"));
+
+$(document).ready(function(){
+	
+	/*
+	*  1. 遍历当前用的 /.settings/wallpaers 文件夹，将所有墙纸遍历出来··
+	*  2. 生成微缩图
+	*  3. 显示微缩图
+	*/
+	//var wppath = "/home/"+parent.$.aos.users.current+"/.settings/wallpapers";
+	var wppath = "/images/theme/wallpapers";
+	var wallpapers = parent.$.aos.oldfs.ls(wppath);
+	for(var i=0; i < wallpapers.length; i++){
+		var file = wallpapers[i];
+		var path = parent.$.util.getImagePreview(file.path);
+		var li = $("<li><a href='#'><img src='"+path+"' /></a></li>");
+		li.find('a').animate({'opacity' : 0.4}).hover(function() {
+			$(this).animate({'opacity' : 1});
+		}, function() {
+			$(this).animate({'opacity' : 0.4});
+		}).click({path: file.path},function(event){
+			var p = event.data.path;
+			var img = parent.$.util.getImage(p);
+			$("body",top.document).css("background", "url(\""+img+"\") repeat scroll 0 0 transparent");
+			systemConfig.currentWallpaper = p;
+		});
+		
+		$(".item").append(li);
+	}
+	
+	$("#saveConfig").click({config: systemConfig}, function(event){
+    //$("#saveConfig").click(function(event){
+		parent.$.aos.reg.updateValue(parent.$.aos.users.current+"_sysconfig", JSON.stringify(event.data.config));
+		alert("桌面设置已保存");
+	});
+	
+});
+
+function changeStyle(index){
+	switch(index){
+		case 0:
+			$("#_amskin",top.document).attr("href","css/black1.css");
+			systemConfig.currentSkin =  "css/black1.css";
+		break
+		case 1:	
+			$("#_amskin",top.document).attr("href","css/black2.css");
+			systemConfig.currentSkin =  "css/black2.css";
+		break
+		case 2:	
+			$("#_amskin",top.document).attr("href","css/gray.css");
+			systemConfig.currentSkin =  "css/gray.css";
+		break
+		default :
+			//$("#_amskin",top.document).attr("href","css/gray.css");
+		break
+	}
+}
+
+
+</script>
+
+</head>
+
+<body>
+<!--start warp-->
+<div class="wrap">
+	<!--start ui-tab-->
+    <div class="ui-tab">
+		<!--start ui-tab-triggers-->
+    	<div class="ui-tab-triggers">
+        	<a href="index.html" class="ui-tab-trigger-cell ui-tab-trigger-cell-current">
+                <span class="skin_icon"></span>
+                <p>主题设置</p>
+            </a>
+            <!---->
+        	<a href="desktop.html" class="ui-tab-trigger-cell">
+                <span class="computer_icon"></span>
+                <p>桌面设置</p>
+            </a>
+            <!---->
+        	<a href="app.html" class="ui-tab-trigger-cell">
+                <span class="app_icon"></span>
+                <p>我的应用</p>
+            </a>
+            <!---->
+        	<!--<a href="dock.html" class="ui-tab-trigger-cell">
+                <span class="dock_icon"></span>
+                <p>应用码头设置</p>
+            </a> -->           
+        </div>
+        <!--ui-tab-triggers-->
+        
+		<!--start ui-tab-container-->
+        <div class="ui-tab-container">
+            <div id="container1" class="ui-tab-container-cell">
+                <div class="tool-bar">
+                    <a href="#">取消</a>
+                    <a id="saveConfig" href="#">保存设置</a>
+                </div>
+                <!---->
+                <div class="set-themes">
+                    <div class="set-skin">
+                        <p>主题设置：</p>
+                        <span onclick="changeStyle(0)" class="set-skin-black1"></span>
+                        <span onclick="changeStyle(1)" class="set-skin-gray"></span>
+                        <span onclick="changeStyle(2)" class="set-skin-black2"></span>
+                        <!--<span class="set-skin-yellow"></span>
+                        <span class="set-skin-red"></span>-->
+                    </div>
+                    <div class="set-bg">
+                    	<p>背景设置：</p>
+                        <ul class="item">
+                            <!--<li><a href="#"><img /></a></li>-->
+                        </ul>
+                    </div>
+              		<!--<div class="set-bg-upload">
+                        <p>自定义壁纸：上传的壁纸大小不超过1M</p>
+                        <div class="set-bg-upload-btn">
+                            <a href="#" class="fileinput-btn">上传壁纸</a>
+                            <input type="file" name="files[]" multiple>
+                        </div>
+                    </div>-->
+                </div>
+                
+                <div class="sprite"></div>
+            </div>
+            <!---->
+            
+        </div>
+        <!--end ui-tab-container-->
+    </div>
+    <!--end ui-tab-->
+</div>
+<!--end warp-->
+</body>
+</html>
+

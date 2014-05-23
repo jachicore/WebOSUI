@@ -1,0 +1,82 @@
+@charset "utf-8";
+/* CSS Document */
+
+.dock, .dock ul, .dock li, .dock img, .dock span, .dock a{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+	list-style:none;
+}
+
+
+.dock {
+	text-align: center;
+	margin:0 auto;
+	height: 50px;
+	position:fixed;
+	bottom:30px;
+	left:50%
+}
+
+.dock ul{
+	background: url(../images/dock/dock-middle.png) repeat-x left bottom;
+	height: 50px;
+	position: absolute;
+	margin:0 -60px;
+	
+}
+/* */
+.dock ul:before, .dock ul:after {
+	content: "";
+	color: transparent;
+	display: inline-block;
+	width: 0px;
+	padding-top:50px;
+	vertical-align: bottom;
+}
+.dock ul:before {
+	padding-left:60px;
+	margin-left:-60px;
+	background:url(../images/dock/dock-left.png) repeat-x left bottom;
+	float:left;
+}
+.dock ul:after {
+	padding-right:60px;
+	margin-right:-60px;
+	background:url(../images/dock/dock-right.png) repeat-x right bottom;
+	float: right;
+}
+
+
+.dock li {
+	text-align:center;
+	font-weight: bold;
+	text-decoration: none;
+	position: absolute;
+	display: block;
+	cursor:pointer;
+	bottom:10px; /* top是下跳动，bottom是上跳动*/
+}
+
+.dock li img {
+	border: none;
+	margin: 0 auto;
+	width: 100%;
+}
+
+.dock li.cutline {
+	background:url(../images/dock/dock-seperator.png)  no-repeat center 20px ;
+	width:20px;
+	height:50px;
+}
+
+/*dock-right-menu*/
+.dock-right-menu{position:relative;display:block;width:200px;height:auto; font-size:12px;padding:0;background:#FFF;-webkit-box-shadow: #333 2px 2px 3px;-moz-box-shadow: #333 2px 2px 3px;box-shadow: #333 2px 2px 3px; overflow:hidden;z-index:999;}
+.dock-right-menu a{ display:block;height:25px;line-height:25px;width:auto;margin:3px;text-decoration:none;color:#000; overflow:hidden; outline:none; text-indent:25px;}
+.dock-right-menu a:hover{color:#FFF;text-decoration:none; background:#338CC8;}
+.dock-right-menu a:hover span{color:#FFF;}
+.dock-right-menu a span{ color:#09F}

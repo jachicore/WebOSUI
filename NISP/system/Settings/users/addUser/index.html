@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>添加用户向导</title>
+<link rel="stylesheet" type="text/css" href="css/amwizard.css" />
+<script type="text/javascript" src="js/lang/jquery-1.7.min.js"></script>
+<script type="text/javascript" src="js/plugin/amwizard.js"></script>
+<script type="text/javascript" src="../groupManager/js/group_db.js"></script>
+<style>
+	body{ margin: 10px 0px 0px 0px;}
+	._setting{ width:}
+	._setting table{ width:90%; margin:30px auto; border:0px #ccc solid}
+	._setting td{ padding:8px;}
+	._setting td.title{ width:120px; vertical-align:top;}
+	._setting td input, ._setting td textarea{ width:100%}
+	._setting td input{ height:24px;}
+	
+	
+	
+	
+</style>
+<script>
+
+var profile = {
+	name: "",
+	title: "",
+	department: "",
+	phone: "-",
+	telephone: "-",
+	qq: "-",
+	fax: "-",
+	email: "-",
+	address: "-",
+	introduction: "-",
+	password: "1234"
+};
+
+var roles = [];
+
+var username;
+var initdesktop = "desktop";
+
+
+$(function(){
+	
+	//初始化
+	$('.am-wizard').amwizard({
+		validatorFunc : validateTabs
+	});
+	initGroups();
+	
+	$("#_groupAdd").click(function(){
+		var selectedGroup = $("#_groups").val();
+		var flag = false;
+		$("#_addedGroups").find("label").each(function(){
+			if($(this).html() == selectedGroup){
+				flag = true;
+			}
+		});
+		if(flag) return
+		
+		var label = $("<label style='display:inline-block; width:200px;'>"+selectedGroup+"</label>");
+		var del = $("<a href='#'>取消</a>");
+		var p = $("<p style='margin:8px'></p>");
+		del.click({p:p,},function(e){
+			e.data.p.remove();
+		});
+		p.append(label).append(del);
+		$("#_addedGroups").append(p);
+	});
+	
+	function initGroups(){
+		var groups = db_findAllGroups();
+		for ( var i = 0; i < groups.length; i++) {
+			var opt = $("<option value='"+groups[i].contentObject.name+"'>"+groups[i].contentObject.name+"</option>");
+			$("#_groups").append(opt);
+		};
+	}
+	
+	function validateTabs(tabIdx){
+	  ret = true;
+	 // alert(tabIdx);
+	  switch(tabIdx){    
+		case 0:
+			username = $("#_username").val();
+			var name = $("#_name").val();
+			var title = $("#_title").val();
+			var department = $("#_department").val();
+			if(username!=''&&name!=''&&title!=''&&department!=''){
+				if(username in parent.$.aos.users.registry){
+					alert("用户名已存在");
+					ret = false;
+				}else{
+					profile.name = name;
+					profile.title = title;
+					profile.department = department;
+					ret = true;	
+				}
+			}else{
+				alert("不能为空！");
+				ret = false;	
+			}
+		  break;
+		case 1:
+			roles = [];
+			$("#_addedGroups").find("label").each(function(){
+				roles.push($(this).html());
+			});
+			
+			$("td:eq(1)", $("#t3")).html(username);
+			$("td:eq(3)", $("#t3")).html(profile.name);
+			$("td:eq(5)", $("#t3")).html(profile.title);
+			$("td:eq(7)", $("#t3")).html(profile.department);
+			$("td:eq(9)", $("#t3")).html(roles.toString());
+			
+		  break;
+		  
+		case 2:
+			//console.log(profile);
+			
+			var newUser = {
+				profile : profile,
+				roles : roles
+			}
+			//console.log(newUser);
+			
+			if(username!='' && typeof(username)!='undefined'){
+				parent.$.aos.users.um.saveUser(username, JSON.stringify(newUser));
+				parent.$.aos.fs.mkdir("/home/"+username);
+				parent.$.aos.fs.mkdir("/home/"+username+"/"+initdesktop);
+				parent.$.aos.fs.mkdir("/home/"+username+"/.dock");
+				parent.$.aos.fs.mkdir("/home/"+username+"/.app/myapp");
+
+				var systemConfig = {
+					currentDesk: initdesktop,
+					currentWallpaper: "/home/.default/.settings/wallpapers/16.jpg",
+					currentSkin: "css/gray.css"
+				}
+				parent.$.aos.fs.write("/home/"+username+"/.system.config", JSON.stringify(systemConfig));
+				
+				//console.log(db_findAppsByGroups(roles));
+				var _apps = db_findAppsByGroups(roles);
+				var _appPath = "/home/"+username+"/.app/myapp/";
+				//console.log(_apps);
+				for ( var k = 0; k < _apps.length; k++) {
+					addShortcut(_apps[k].name,_apps[k].path,_appPath,username);
+				}
+				
+				alert("添加完成！");
+				windata.pre.refresh();
+				windata.self.close();//关闭窗口				
+			}else{
+				alert('创建失败');
+			}
+		  break;
+		default:
+			ret = true;
+		  break;
+	  }
+	  return ret;
+	}
+});
+
+function addShortcut(filename, from, to, username){
+	//console.log(filename+"  "+from+"   "+to);
+	if(top.$.aos.fs.exists(to+filename+".shortcut") == 'true'){
+		return
+	}
+	var shortcut = {name:filename, path:from, type:'file'};
+	top.$.aos.fs.write(to+filename+".shortcut",JSON.stringify(shortcut));
+	
+	var shortcutToDesktop = {name:filename, path:to+filename+".shortcut", type:'file'};
+	top.$.aos.fs.write("/home/"+username+"/"+initdesktop+"/"+filename+".shortcut",JSON.stringify(shortcutToDesktop));
+}
+
+
+
+</script>
+</head>
+
+<body>
+<div class="am-wizard">
+	<ul class="steps">
+		<li class="fir-selected"><a name="step-1" href="#">基本信息</a></li>
+		<li class="step-disable"><a name="step-2" href="#">组信息</a></li>
+		<li class="step-disable"><a name="step-3" href="#">完成</a></li>
+  	</ul>
+	  <div class="wizard-cont">
+		<div id="step-1">
+            <div class="_setting">
+                <table>
+                  <tr>
+                    <td class="title">登录用户名：</td>
+                    <td><input id="_username" type="text" /></td>
+                  </tr>
+                  <tr>
+                    <td class="title">姓名：</td>
+                    <td><input id="_name" type="text" /></td>
+                  </tr>
+                  <tr>
+                    <td class="title">职位：</td>
+                    <td><input id="_title" type="text" value='-' /></td>
+                  </tr>
+                  <tr>
+                    <td class="title">部门：</td>
+                    <td><input id="_department" type="text" value='-' /></td>
+                  </tr>
+                </table>
+            </div>
+        </div>
+		<div id="step-2">
+        	<div class="_setting">
+                <table>
+                  <tr>
+                    <td class="title">选择用户组：</td>
+                    <td>
+                    	<select id='_groups' style='width:200px;'>
+<!--                     		<option>1</option> -->
+<!--                     		<option>2</option> -->
+<!--                     		<option>3</option> -->
+                    	</select>
+                    	<button id='_groupAdd'>加入</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="title">已加入的组：</td>
+                    <td id='_addedGroups'>
+<!--                     	<p style="margin:8px;"><label style="display:inline-block; width:200px;">Administrator</label> <a href='#'>取消</a></p> -->
+<!--                     	<p style="margin:8px;"><label style="display:inline-block; width:200px;">Administrator</label> <a href='#'>取消</a></p> -->
+                    </td>
+                  </tr>
+                </table>
+            </div>
+        </div>
+		<div id="step-3">
+        	<div class="_setting">
+                <table id="t3">
+                  <tr>
+                    <td class="title">用户名：</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="title">姓名：</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="title">头衔：</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="title">部门：</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="title">用戶组：</td>
+                    <td></td>
+                  </tr>
+                </table>
+            </div>
+        </div>
+	  </div>
+	  <div class="wizard-btn">
+		<div class="prev"><a href="#">&lt;&lt; 上一步</a></div>
+		<div class="next"><a href="#">下一步 &gt;&gt;</a></div>
+	  </div>
+</div>
+
+</body>
+</html>
+

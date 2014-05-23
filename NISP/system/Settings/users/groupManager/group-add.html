@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户组应用管理</title>
+<script type="text/javascript" src="js/jquery-1.7.min.js" ></script>
+<script type="text/javascript" src="js/group.js"></script>
+<script type="text/javascript" src="js/group-add.js"></script>
+<link type="text/css" rel="stylesheet" href="css/mm-template.css" />
+<script type="text/javascript">
+	$(function(){
+		//初始化
+		ListGroups();
+		addGroupEvent();
+	});
+</script>
+</head>
+
+<body style="margin:30px;">
+
+<!-- start mm-dialog -->
+<div class="mm-dialog">
+  <div class="mm-title"> <span class="mm-dialog-caption">管理用户组</span> </div>
+  <!-- end mm-title -->
+  <div class="mm-content">
+    <div class="mm-left-tree">
+      <p>当前所有组：</p>
+<!--       <p style="margin:0px 0 0 20px;"><label style="display:inline-block; width:150px;">Administrator</label> <a href='#'>删除</a></p> -->
+<!--       <p style="margin:0px 0 0 20px;"><label style="display:inline-block; width:150px;">oa</label> <a href='#'>删除</a></p> -->
+    </div>
+    <div class="mm-right-tree">
+      <p>输入用户组名：</p>
+	  <p><input id='_name' type='text' /></p>
+    </div>
+    <!-- end mm-right-tree --> 
+  </div>
+  <!-- end mm-content -->
+  <div class="left-mm-dialog-button">
+    <input id="delete-user" type="button" class="mm-button mm-button-cancel" value="删除" />
+  </div>
+  <div class="mm-dialog-button ">
+    <input id="groupAdd" type="submit" class="mm-button mm-button-ok mm-button-save" value="添加" />
+    <input id="back" type="button" class="mm-button mm-button-cancel" value="返回" />
+  </div>
+  <!-- end mm-dialog-button --> 
+</div>
+<!-- end mm-dialog -->
+
+</body>
+</html>

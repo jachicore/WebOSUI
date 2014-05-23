@@ -1,0 +1,98 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*The public*/
+*{ margin:0; padding:0; list-style:none;font:12px "宋体", Arial, Helvetica, sans-serif;}
+ul,li,dl,dd,dt{ list-style:none;}
+/*link*/
+a{color:#272727; font-weight:bold; text-decoration:none;}
+a:hover{ color:#FFF; text-decoration:none;}
+
+/*float*/
+.f_l{ float:left; display:inline;}
+.f_r{ float:right; display:inline;}
+/*clear*/
+.clear{ clear:both;}
+.sty_none{ display:none;}
+
+
+/*body-wrap*/
+body{}
+.wrap{ margin:0 auto;height:auto;width:720px; border:1px solid #999; overflow:hidden;}
+
+/*sidebar*/
+.sidebar{width:150px; height:500px;background:url(images/sidebar_bg.gif) repeat-y;}
+.sidebar .nav{ width:125px; height:465px; margin:15px 12px;}
+.sidebar .nav li{ height:42px; line-height:42px;border-bottom:1px solid #CDCDCD; overflow:hidden;}
+.sidebar .nav li a{width:100%;height:38px;line-height:38px; margin:2px 0; display:block;}
+.sidebar .nav li a img{float:left; display:inline;width:28px; height:28px; border:0; margin:5px;}
+.sidebar .nav li a:hover{background:#B4B4B4;}
+.sidebar .nav .li_last{border-bottom:none;}
+
+
+/*content*/
+.content{width:570px;; height:auto;overflow:hidden;}
+
+/*sech*/
+.sech{ width:100%; height:30px; background:#E5E5E5;}
+.sech .btn{ width:120px; margin-left:10px;}
+.sech .btn a{float:left;display:block;width:20px; height:16px;margin-top:7px; margin-right:2px;}
+.sech .btn .lst_btn{background:url(images/icon.gif) no-repeat  -32px -30px;}
+.sech .btn .lst_btn:hover{background-position: -52px -30px;}
+.sech .btn .nxt_btn{background:url(images/icon.gif) no-repeat  -72px -30px;}
+.sech .btn .nxt_btn:hover{background-position:-92px -30px;}
+.sech .btn .rfh_btn{background:url(images/icon.gif) no-repeat  -112px -30px;}
+.sech .btn .rfh_btn:hover{background-position:-132px -30px;}
+
+.sech .txt{ width:207px; height:30px; margin-right:10px; background:url(images/icon.gif) no-repeat 0 0;}
+.sech .txt .sech_txt{ margin-top:7px; margin-left:12px;height:16px; line-height:16px; width:168px; border:0;}
+.sech .txt .sech_btn{ margin-top:7px; margin-right:8px; width:16px; height:16px; background:url(images/icon.gif) no-repeat  0 -30px;}
+.sech .txt .sech_btn:hover{background-position:-16px -30px;}
+
+/*banner*/
+.banner{ width:100%; height:220px; overflow:hidden;}
+
+/*all_list*/
+.all_list{width:555px; height:auto; margin:0 7px; overflow:hidden;}
+.all_list .all_icon{ width:100%; height:auto; overflow:auto;}
+
+/*my_list*/
+.my_list{width:555px; height:465px; margin:0 7px; overflow:hidden;}
+.my_list .my_icon{ width:100%;height:430px; overflow:auto;}
+
+/*class_list1*/
+.class_list1{width:555px;height:120px;margin:10px 7px; overflow:hidden;}
+.class_list1 .c_icon1{ width:100%;height:120px; overflow:auto;}
+/*class_list2*/
+.class_list2{width:555px; height:320px; margin:0 7px;overflow:hidden;}
+.class_list2 .c_icon2{ width:100%; height:290px; overflow:auto;}
+
+/*s_box*/
+.s_box{ margin:18px 12px 0 0; width:165px; height:50px;float:left; display:inline; overflow:hidden;}
+.s_box .s_img{width:50px; height:50px; overflow:hidden;}
+.s_box .s_img img{width:50px; height:50px;border:0; }
+.s_box .s_dl{width:110px; height:50px; text-align:left;overflow:hidden; color:#000;}
+.s_box .s_dl dt{ height:25px; line-height:25px; font-weight:bold; overflow:hidden;}
+.s_box .s_dl dd{height:25px; line-height:25px; overflow:hidden;}
+/*l_box*/
+.l_box{margin:10px 8px; width:90px; height:90px; float:left; display:inline; overflow:hidden;}
+.l_box .l_img{ margin:5px auto;width:56px; height:56px; overflow:hidden;}
+.l_box .l_img img{width:56px; height:56px; border:0; }
+.l_box p{ margin:5px auto; width:80px; height:20px; line-height:21px; text-align:center; overflow:hidden; background:#999; color:#FFF; background:url(images/icon.gif) no-repeat -99px -46px;}
+
+.t_list{ width:100%; height:30px; line-height:30px; font-weight:bold; border-bottom:1px solid #979797;}
+
+
+/*info_box*/
+.info_box{position:absolute; width:195px; height:100px; border:1px solid #82A2B1; background:#FFF; margin-top:-108px; z-index:9999;}
+.info_box .i_title{ height:47px; width:195px; background:url(images/tips_bg.png) repeat-x;}
+.info_box .i_title .i_dl{ width:100px; height:34px; margin:0; margin-top:5px; overflow:hidden;}
+.info_box .i_title .i_dl dt{ text-indent:4px;height:18px;  line-height:18px; color:#FFF; font-size:14px;}
+.info_box .i_title .i_dl dd{ text-indent:4px;height:16px;  line-height:16px; color:#8BD2FE;}
+.info_box .i_title .add_btn{ display:block;height:25px; line-height:26px; width:78px; text-indent:22px;background:url(images/icon.gif) no-repeat 0 -71px;  margin-top:10px; margin-right:5px;color:#5583A4;}
+.info_box .i_title .add_btn:hover{ background-position:0 -46px;color:#395B8E;}
+.info_box .i_title .added{ display:block;height:25px; line-height:26px; width:78px; text-indent:22px; margin-top:10px; margin-right:5px;color:#FC6;}
+.info_box .inote_dl{height:52px; width:195px;margin-top:2px;}
+.info_box .inote_dl dd{text-indent:6px; width:195px;height:22px;  line-height:22px; overflow:hidden;}
+.info_box .i_arrow{position:absolute; width:12px; height:6px; background:#666; margin-top:-1px; margin-left:40px; background:url(images/icon.gif) no-repeat -86px -46px;}
+

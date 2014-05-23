@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>desktop</title>
+<link type="text/css" rel="stylesheet" href="css/main.css"/>
+<script type="text/javascript" src="js/lang/jquery-1.7.min.js"></script>
+<script type="text/javascript">
+console.log(parent.$.aos.reg.getValue(parent.$.aos.users.current+"_sysconfig"));
+var systemConfig = JSON.parse(parent.$.aos.reg.getValue(parent.$.aos.users.current+"_sysconfig"));
+
+$(document).ready(function(){
+	
+	//set-desktop-icon-current show	
+	$(".set-desktop-icon").toggle(
+		function(){
+			$(this).addClass('set-desktop-icon-current');
+			$(this).siblings().removeClass('set-desktop-icon-current');
+		},
+		function(){
+			$(this).removeClass('set-desktop-icon-current');
+		}
+	);
+	
+	/*
+	*  1. 遍历当前桌面文件夹
+	*  2. 定义_currentDesktopFlag标签  标记当前选中的桌面
+	*/
+	
+	listAllDesks();
+	
+	$("#deleteDesktop").click(function(){
+		if($("#_currentDesktopFlag").html() == "default"){
+			alert("默认桌面不能删除");
+			return;
+		}
+		  if($("#_currentDesktopFlag").html()!=null && $("#_currentDesktopFlag").html()!=""){
+			  //如果要删除的桌面是默认桌面
+			  if($("#_currentDesktopFlag").html() != systemConfig.currentDesk){
+					var desk = parent.$.aos.desktop.getDesktopByName($("#_currentDesktopFlag").html());
+					desk.removeDesktopDir();
+					parent.$.aos.desktop.removeDesktop(desk);
+
+					listAllDesks();
+					
+					parent.$.aos.desktop.createDesktopScreenIcon();
+					parent.$.aos.desktop.currentDesktop.init();
+			  }else{
+				  alert("当前桌面为默认, 请重新设置一个默认桌面后再删除当前桌面");  
+			  }
+		  }else{
+			  alert("请选择一个桌面进行操作");  
+		  }
+	});
+	
+	$("#createDesktop").click(function(){
+		  var name=prompt("请输入桌面名字","");
+		  if (name!=null && name!="" && parent.$.tools.isLegalChar_ZN(name) && parent.$.aos.fs.exists("/system/desktops/"+name)=='false'){
+			  
+			 var newDesktopPath = "/system/desktops/"+name;
+			  
+			 var desk = parent.$.aos.desktop.createDesktop(new Date().getTime(), name, newDesktopPath);
+			 desk.makeDesktopDir();
+			  
+			  listAllDesks();
+			  
+			  parent.$.aos.desktop.createDesktopScreenIcon();
+			  parent.$.aos.desktop.currentDesktop.init();
+			  
+		  }else{
+			  alert("桌面名字不能为空、非法字符或已存在，请重新命名！");   
+		  }
+	});
+	
+	$("#renameDesktop").click(function(){
+		if($("#_currentDesktopFlag").html() == "default"){
+			alert("默认桌面不能重命名");
+			return;
+		}
+		  if($("#_currentDesktopFlag").html()!=null && $("#_currentDesktopFlag").html()!=""){
+
+				//如果要删除的桌面是默认桌面
+				if($("#_currentDesktopFlag").html() != systemConfig.currentDesk){
+					var name=prompt("请输入桌面名字","");
+			   		var currentRoot = "/home/"+parent.$.aos.users.current;
+					if (name!=null && name!="" && parent.$.tools.isLegalChar_ZN(name) && parent.$.aos.fs.exists("/system/desktops/"+name)=='false'){
+	
+						var desk = parent.$.aos.desktop.getDesktopByName($("#_currentDesktopFlag").html());
+						console.log(desk);
+						desk.reNameDesktopDir(name);
+						parent.$.aos.desktop.renameDesktop(desk,name);
+	
+						listAllDesks();
+						
+						parent.$.aos.desktop.createDesktopScreenIcon();
+				  		parent.$.aos.desktop.currentDesktop.init();
+					}else{
+				  alert("桌面名字不能为空、非法字符或已存在，请重新命名！");     
+					}
+				}else{
+					alert("当前桌面为默认, 请重新设置一个默认桌面后再重命名当前桌面");  
+				}
+		  }else{
+			  alert("请选择一个桌面进行操作");  
+		  }
+	});
+	
+	$("#defaultDesktop").click(function(){
+		  if($("#_currentDesktopFlag").html()!=null && $("#_currentDesktopFlag").html()!=""){
+			  systemConfig.currentDesk = $("#_currentDesktopFlag").html();
+			  parent.$.aos.reg.updateValue(parent.$.aos.users.current+"_sysconfig", JSON.stringify(systemConfig));
+			  listAllDesks();
+			  parent.$.aos.desktop.createDesktopScreenIcon();
+			  parent.$.aos.desktop.currentDesktop.init();
+		  }else{
+			  alert("请选择一个桌面进行操作");  
+		  }
+	});
+
+});
+
+function listAllDesks(){
+	$(".set-desktop-list").html('');
+	$("#_currentDesktopFlag").html('');
+	var desktopArray = parent.$.aos.fs.lsDirs("/system/desktops");
+	
+	for(var i=0; i < desktopArray.length;i++){
+		var desktopf = desktopArray[i];
+		var cont = '';
+		cont += "<div class='set-desktop-icon'>";
+		cont += "  <span class=''><img /></span>";
+		cont += "  <p>"+desktopf.name+"</p>";
+		if(desktopf.name == systemConfig.currentDesk){
+			cont += "  <div class='home-icon'></div>";
+		}
+		cont += "</div>";
+		
+		$cont = $(cont).click(function(){
+			$(this).addClass("set-desktop-icon-current").siblings().removeClass("set-desktop-icon-current");
+			$("#_currentDesktopFlag").html($("p",$(this)).html());
+			if($("p",$(this)).html()=="default"){
+				$("#deleteDesktop").attr("disabled",true);
+				$("#deleteDesktop").attr("disabled","disabled");
+				//alert($("#_currentDesktopFlag").html());
+			}
+			else{
+				$("#deleteDesktop").attr("disabled",false);
+			}
+		});
+		$(".set-desktop-list").append($cont);
+	}
+
+}
+
+
+
+</script>
+
+
+</head>
+
+<body>
+<!--start warp-->
+<div class="wrap">
+	<!--start ui-tab-->
+    <div class="ui-tab">
+		<!--start ui-tab-triggers-->
+    	<div class="ui-tab-triggers">
+        	<a href="index.html" class="ui-tab-trigger-cell">
+                <span class="skin_icon"></span>
+                <p>主题设置</p>
+            </a>
+            <!---->
+        	<a href="desktop.html" class="ui-tab-trigger-cell ui-tab-trigger-cell-current">
+                <span class="computer_icon"></span>
+                <p>桌面设置</p>
+            </a>
+            <!---->
+        	<a href="app.html" class="ui-tab-trigger-cell">
+                <span class="app_icon"></span>
+                <p>我的应用</p>
+            </a>
+            <!---->
+        	<!--<a href="dock.html" class="ui-tab-trigger-cell">
+                <span class="dock_icon"></span>
+                <p>应用码头设置</p>
+            </a> -->           
+        </div>
+        <!--ui-tab-triggers-->
+        
+		<!--start ui-tab-container-->
+        <div class="ui-tab-container">
+            <!---->
+            <div class="ui-tab-container-cell">
+                <div class="tool-bar">
+                    <a id="deleteDesktop" href="#">删除桌面</a>
+                    <a id="createDesktop" href="#">新建桌面</a>
+                    <a id="renameDesktop" href="#">重命名桌面</a>
+               		<a id="defaultDesktop" href="#">设定默认桌面</a>
+                </div>
+                <!---->
+                 <div class="set-desktop">
+                	<div id="_currentDesktopFlag" style="display:none"></div>
+                    <div class="set-desktop-list">
+                    	
+                        <!--<div class="set-desktop-icon">
+                            <span class=""><img /></span>
+                            <p>第一桌面</p>
+                            <div class="home-icon"></div>
+                        </div>
+                        <div class="set-desktop-icon">
+                            <span class=""></span>
+                            <p>第二桌面</p>
+                        </div>-->
+                    </div>
+                    
+                    <!--<div class="context-menu">
+                        <a href="#">删除桌面</a>
+                        <a href="#">设为默认桌面</a>
+                        <a href="#">重命名</a>
+                    </div>-->
+                </div>
+                <div class="sprite"></div>
+            </div>
+            <!---->
+            
+        </div>
+        <!--end ui-tab-container-->
+    </div>
+    <!--end ui-tab-->
+</div>
+<!--end warp-->
+</body>
+</html>
+

@@ -1,0 +1,74 @@
+
+<style>
+*{margin:0; padding:0; font-size:12px;}
+div.fb{margin:0; padding:0; font-size:12px;}
+.fb-path{height:30px;width:100%; min-width:770px;line-height:30px; background:#e8e9ea; border-bottom:1px solid #d9d8d8; }
+
+.fb-path ul li{height:30px; line-height:30px;float:left; list-style:none;}
+.fb-path .fb-path-pre{ background:url(images/plugin/filebrowser/fb-path-pre.png) no-repeat center; width:40px; cursor:pointer;}
+.fb-path .fb-path-pre:hover{ background:url(images/plugin/filebrowser/hover-out.png) no-repeat center;}
+.fb-path .fb-path-next{ background:url(images/plugin/filebrowser/fb-path-next.png) no-repeat center;width:40px; cursor:pointer;}
+.fb-path .fb-path-next:hover{ background:url(images/plugin/filebrowser/hover-back.png) no-repeat center;}
+.fb-path .fb-path-parent{ background:url(images/plugin/filebrowser/fb-path-parent.png) no-repeat center;width:40px; cursor:pointer;}
+.fb-hidepath{ display:none }
+.fb-path .fb-path-parent:hover{ background:url(images/plugin/filebrowser/hover-bookmark.png) no-repeat center;}
+.fb-path .fb-path-select{height:21px; line-height:21px;margin-top:4px;background-color:white; border:1px solid #babbbc; overflow:hidden;}
+.fb-path .fb-path-select span{ padding:0 5px; cursor:pointer; border-left:1px solid #edf7fb;
+ border-right:1px solid #edf7fb;  display:block; float:left; height:21px; line-height:21px;}
+ .fb-path .fb-path-select span img{ margin:6px 0 0 0;}
+.fb-path .fb-path-select span:hover{ background:#edf7fb;border-left:1px solid #87badd; border-right:1px solid #a5d0e6; }
+.fb-path .fb-path-search{ background:url(images/plugin/filebrowser/fb-path-search.png) no-repeat right center;height:21px;margin-top:4px;width:200px;background-color:white; border:1px solid #babbbc; float:right;}
+.fb-path .fb-path-search a{ display:block; float:right;width:20px;height:23px;}
+.fb-path .fb-path-search input{ border:0;  height:19px;line-height:19px; position:relative; top:-4px;padding:0 5px; width:165px;}
+.fb-path .fb-path-view{ background:url(images/plugin/filebrowser/fb-path-view.png) no-repeat center;width:60px; float:right; text-align:center; cursor:pointer;}
+.fb-path .fb-path-view select.viewSelect{ background:#E8E9EA}
+.showSelectList div:hover{ background:#edf7fb;}
+
+.fb-info{ width:99%; overflow:hidden;  border:1px solid #fff; cursor:pointer;}
+.fb-info:hover{ background:#edf7fb; border:1px solid #87badd;cursor:pointer;}
+
+.fb-info li{ float:left; padding:0 5px;line-height:30px;margin:5px; list-style:none; width:20%;}
+
+.fb-info-hd{height:30px; line-height:30px; background:url(images/plugin/filebrowser/fb-info.gif) repeat-x top;}
+.fb-info-hd:hover{ border:1px solid #fff; background:url(images/plugin/filebrowser/fb-info.gif) repeat-x top;}
+.fb-info-hd li{float:left; padding:0 5px; background:url(images/plugin/filebrowser/fb-info-line.gif) no-repeat top right;}
+
+</style>
+
+<div class="fb">
+    <div class="fb-path">
+        <ul>
+            <li class="fb-path-pre"></li>
+            <li class="fb-path-next"></li>
+            <li class="fb-path-parent"></li>
+            <li class="fb-path-select"></li>
+            <li class="fb-path-view">
+            	<select class="viewSelect">
+                	<option value="iconView">图标</option>
+                    <option value="listView">列表</option>
+                </select>
+            </li>
+            
+            <li class="fb-path-search"><input type="text" value="" name="text" /><a class="bt"></a></li>
+        </ul>
+    </div>
+    <div style="position:relative;clear:both; min-width:600px;">
+        <div class="fb-left" style="width:200px; position:absolute; top:0; left:0;">
+            <div class="fb-left-content zTreeDemoBackground" style="width:194px; float:left;">
+                <!-- <h3>文件系统</h3> -->
+                <ul id="treeDemo" class="ztree">   
+                </ul>
+            
+            </div>
+            <div class="fb-left-bar" style="width:6px; display:table-cell;vertical-align:middle;background:#eee;">
+                <img class="barimg" style="margin:0;vertical-align:middle;" border="0" src="images/plugin/filebrowser/hide.png" />
+            </div>
+    
+        </div>
+        <div class="fb-right" style="margin-left:200px; border-left:1px solid #d9d8d8; overflow:auto">
+        	<ul>
+      		</ul>
+            <span class="fb-hidepath"></span>
+        </div>
+    </div>
+</div>

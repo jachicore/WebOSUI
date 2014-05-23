@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>dock</title>
+<link type="text/css" rel="stylesheet" href="css/main.css"/>
+<script type="text/javascript" src="js/lang/jquery-1.7.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	//set-app-icon show	
+	$(".set-app-icon").toggle(
+		function(){
+			$(this).addClass('set-app-icon-current');
+			$(this).siblings().removeClass('set-app-icon-current');
+		},
+		function(){
+			$(this).removeClass('set-app-icon-current');
+		}
+	);
+	
+
+});
+</script>
+
+</head>
+
+<body>
+<!--start warp-->
+<div class="wrap">
+	<!--start ui-tab-->
+    <div class="ui-tab">
+		<!--start ui-tab-triggers-->
+    	<div class="ui-tab-triggers">
+        	<a href="index.html" class="ui-tab-trigger-cell">
+                <span class="skin_icon"></span>
+                <p>主题设置</p>
+            </a>
+            <!---->
+        	<a href="desktop.html" class="ui-tab-trigger-cell">
+                <span class="computer_icon"></span>
+                <p>桌面设置</p>
+            </a>
+            <!---->
+        	<a href="app.html" class="ui-tab-trigger-cell">
+                <span class="app_icon"></span>
+                <p>我的应用</p>
+            </a>
+            <!---->
+        	<a href="dock.html" class="ui-tab-trigger-cell ui-tab-trigger-cell-current">
+                <span class="dock_icon"></span>
+                <p>应用码头设置</p>
+            </a>            
+        </div>
+        <!--ui-tab-triggers-->
+        
+		<!--start ui-tab-container-->
+        <div class="ui-tab-container">
+            <div class="ui-tab-container-cell">
+                <div class="tool-bar">
+                    <a href="#">删除应用</a>
+                    <a href="#">添加应用</a>
+                </div>
+                <!---->
+                <div class="set-app">
+                    <div class="set-app-list">
+                        <div class="set-app-icon">
+                            <span class=""><img src="css/images/skin_icon.png" width="56" height="56" /></span>
+                            <p>共享检测</p>
+                        </div>
+                        <div class="set-app-icon">
+                            <span class=""><img src="css/images/computer_icon.png" width="56" height="56" /></span>
+                            <p>信息推送</p>
+                        </div>
+                        <div class="set-app-icon">
+                            <span class=""><img src="css/images/skin_icon.png" width="56" height="56" /></span>
+                            <p>运维报表</p>
+                        </div>
+                        <div class="set-app-icon">
+                            <span class=""><img src="css/images/computer_icon.png" width="56" height="56" /></span>
+                            <p>信息推送</p>
+                        </div>
+                        <div class="set-app-icon">
+                            <span class=""><img src="css/images/skin_icon.png" width="56" height="56" /></span>
+                            <p>流量分析</p>
+                        </div>
+                        <div class="set-app-icon">
+                            <span class=""><img src="css/images/computer_icon.png" width="56" height="56" /></span>
+                            <p>运维报表</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sprite"></div>
+              </div>
+            </div>
+            <!---->
+            
+        </div>
+        <!--end ui-tab-container-->
+    </div>
+    <!--end ui-tab-->
+</div>
+<!--end warp-->
+</body>
+</html>
+

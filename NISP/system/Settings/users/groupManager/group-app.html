@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户组应用管理</title>
+<link type="text/css" rel="stylesheet" href="../../../../js/ajs/utils/tree/tree/zTreeStyle.css"/>
+<script type="text/javascript" src="js/jquery-1.7.min.js" ></script>
+<script type="text/javascript" src="../../../../js/ajs/utils/tree/tree/jquery.ztree.all-3.2.js"></script>
+<script type="text/javascript" src="../../../../js/ajs/utils/tree/Gntree.js"></script>
+<script type="text/javascript" src="js/group.js"></script>
+<script type="text/javascript" src="js/group-app.js"></script>
+<link type="text/css" rel="stylesheet" href="css/mm-template.css" />
+<script type="text/javascript">
+	$(function(){
+		//初始化
+		// var tree = initTree();
+    initTreeApp();
+		initGroups();
+		initEvent();
+	});
+</script>
+</head>
+
+<body style="margin:30px;">
+
+<!-- start mm-dialog -->
+<div class="mm-dialog">
+  <div class="mm-title"> <span class="mm-dialog-caption">用户组应用管理</span> </div>
+  <!-- end mm-title -->
+  <div class="mm-content">
+    <div class="mm-left-tree">
+      <p>请选择应用：</p>
+      <div class="left-app-list">
+        <dl></dl>
+      </div>
+    </div>
+    <!-- end mm-left-tree -->
+    <div class="mm-add-button">
+      <p>
+        <input id="add" type="button" class="mm-button mm-button-ok" value="分配 >" />
+      </p>
+      <p>
+        <input id="del" type="button" class="mm-button mm-button-del" value="< 删除" />
+      </p>
+    </div>
+    <!-- end mm-add-button -->
+    <div class="mm-right-tree">
+      <label>请选择用户组：</label>
+      <select class="mm-group">
+      </select>
+      <!-- <div class="mm-group"></div> -->
+      <p>已添加应用：</p>
+      <div class="right-app-list">
+        <dl></dl>
+      </div>
+    </div>
+    <!-- end mm-right-tree --> 
+  </div>
+  <!-- end mm-content -->
+  <div class="mm-dialog-button">
+    <input id="addGroup" type="button" class="mm-button" value="管理用戶组" />
+    <input id="save" type="submit" class="mm-button mm-button-ok mm-button-save" value="保存" />
+    <!--<input id="cancel" type="button" class="mm-button mm-button-cancel" value="取消" />-->
+  </div>
+  <!-- end mm-dialog-button --> 
+</div>
+<!-- end mm-dialog -->
+
+</body>
+</html>

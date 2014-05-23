@@ -1,0 +1,107 @@
+@charset "utf-8";
+/* CSS Document dataGrid plugin*/
+*{ margin:0; padding:0; list-style:none;font:12px "宋体", Arial, Helvetica, sans-serif; color:#333;}
+
+/*dg-grid 表格插件-数据列表*/
+#dg-grid{
+	border-radius:4px;
+ 	border:1px solid #8B8B8B;
+}
+
+/*dg-grid-container 表格插件-数据列表容器*/
+.dg-grid-container{width:100%;height:auto;overflow:hidden;border-radius:4px;}
+
+/*dg-grid-titile 表格插件-数据列表标题*/
+.dg-grid-titile{height:35px; line-height:35px; text-indent:10px; width:100%; color:#000;
+	border-top-left-radius:4px;
+	border-top-right-radius:4px;
+	border-top:5px solid #8B8B8B; 
+	border-bottom:1px solid #8B8B8B;
+	background:url(images/dg-table-bg.png) 0 0 repeat-x;
+	overflow:hidden;
+}
+
+/*dg-grid-menu 表格插件-数据列表菜单*/
+.dg-grid-menu{height:35px; line-height:35px; text-indent:10px; width:100%;background:url(images/dg-table-bg.png) 0 -35px repeat-x; overflow:hidden;}
+.dg-grid-menu a.dg-btn-a{ float:left; margin-top:4px;text-align:center; padding:6px 10px;text-indent:0; text-decoration:none;color:#111;
+-moz-border-radius:2px;
+-webkit-border-radius:2px;
+border-radius:2px;
+background: -webkit-gradient(linear, 0 0, 0 bottom, from(#CCC), to(#999));
+background: -moz-linear-gradient(#CCC, #999);
+background: linear-gradient(#CCC, #999);
+}
+.dg-grid-menu a.dg-btn-a:hover{color:#FFF;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;background: -webkit-gradient(linear, 0 0, 0 bottom, from(#46474B), to(#151618));background: -moz-linear-gradient(#46474B, #151618);background: linear-gradient(#46474B, #151618);}
+.dg-grid-menu .dg-btn-bg{ float:left; width:auto;text-indent:5px; line-height:25px; height:25px; margin:3px 8px;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px; border:1px solid #BBBBBB;-webkit-box-shadow: #BBB 0px 1px 2px;-moz-box-shadow: #BBB 0px 1px 2px;box-shadow: #BBB 0px 1px 2px; background: -webkit-gradient(linear, 0 0, 0 bottom, from(#EDEDED), to(#D0D0D0));background: -moz-linear-gradient(#EDEDED, #D0D0D0);background: linear-gradient(#EDEDED, #D0D0D0);}
+.dg-grid-menu .dg-btn-bg span{ margin-right:4px; line-height:26px;}
+.dg-grid-menu .dg-btn-bg input,.dg-grid-menu .dg-btn-bg select{ margin-right:4px;}
+
+/*dg-grid-tips  表格插件-表格插件提示信息*/
+.dg-grid-tips{ line-height:45px; height:45px;text-indent:10px;border-top:1px solid #8B8B8B;background:url(images/dg-table-bg.png) 0 -70px repeat-x;}
+
+/*dg-grid-table 表格插件-数据列表内容*/
+.dg-grid-table{display:table;table-layout: fixed;white-space:normal;border-spacing:1px;background:#CCC;width:100%;height:auto;font-size:12px;	text-align:left;}
+.dg-grid-table .tr{width:100%;display:table-row;height:24px;line-height:24px;}
+.dg-grid-table .tr:hover li{background:#FFF;}
+.dg-grid-table .head:hover{ background:url(images/dg-table-bg.png) 0 -115px repeat-x;}
+.dg-grid-table .tr li{display:table-cell;word-break: break-all; word-wrap:break-word;background:#FAFAFA;line-height:24px;padding:0 5px;}
+.dg-grid-table .tr li input{margin-top:2px;}
+.dg-grid-table .head li{background:url(images/dg-table-bg.png) 0 -115px repeat-x;}
+.dg-grid-table .head span.sort{float:right;width:10px;height:10px;margin-top:8px;margin-right:3px;overflow:hidden;line-height:20;background:url(images/dg-sort.gif) no-repeat center right;}
+.dg-grid-table .head:hover li{background:url(images/dg-icon.png) repeat-x 0 -72px;}
+.dg-grid-table .head li:hover{ background:url(images/dg-table-bg.png) 0 -140px repeat-x;}
+/*dg-grid-table input edit 表格插件-数据列表-行内编辑input样式*/
+.dg-grid-table .edit-no {width:98%;}
+.dg-grid-table .edit-txtarea {background:#FFF;width:98%;line-height:24px;padding:2px 0;}
+.dg-grid-table .edit-input {border:0;background:#FFF;width:98%;padding:2px 0;}
+
+/*dg-grid-toolbar 表格插件-数据列-底部工具栏*/
+.dg-grid-toolbar{width:100%;height:30px;background:url(images/dg-table-bg.png) 0 -40px repeat-x; overflow:hidden;}
+.dg-grid-toolbar .link{float:right;display:inline;text-align:left;height:28px;line-height:28px;overflow:hidden;margin:0 10px 0 0;}
+.dg-grid-toolbar .link a{margin-left:10px; text-align:center; padding:5px 8px; height:24px; line-height:24px; text-indent:0; text-decoration:none;color:#111;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;background: -webkit-gradient(linear, 0 0, 0 bottom, from(#CCC), to(#999));background: -moz-linear-gradient(#CCC, #999);background: linear-gradient(#CCC, #999);}
+.dg-grid-toolbar .link a:hover{color:#FFF;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;background: -webkit-gradient(linear, 0 0, 0 bottom, from(#46474B), to(#151618));background: -moz-linear-gradient(#46474B, #151618);background: linear-gradient(#46474B, #151618);}
+
+/*dg-grid-pagetrun 表格插件-数据列-翻页栏*/
+.dg-grid-pagetrun{width:100%;height:30px;background:#EFEFEF; border-top:1px solid #DDD;overflow:hidden;}
+.dg-grid-pagetrun div{float:left;display:inline;line-height:30px;}
+.dg-grid-pagetrun .page{float:right;width:440px;text-align:center;}
+.dg-grid-pagetrun .page span{margin:0px 3px;line-height:30px;}
+.dg-grid-pagetrun .page .txt_page{width:20px;}
+.dg-grid-pagetrun .page .slct_page{margin-top:5px;margin-left:2px;}
+.dg-grid-pagetrun .page .page_a_btn{float:left;display:block;height:24px;width:28px;margin-top:2px;border:1px solid #EFEFEF;}
+.dg-grid-pagetrun .page .page_a_btn:hover{background:url(images/dg-icon.png) repeat-x 0 -48px;border:1px solid #B7CDDE;}
+.dg-grid-pagetrun .page .page_a_btn span{display:block;height:24px;width:26px;}
+.dg-grid-pagetrun .count{float:left;display:inline;width:220px;text-align:left;line-height:30px;overflow:hidden; margin-left:10px;}
+/*dg-grid-pagetrun icon 表格插件-数据列表-底部工具栏 翻页按钮背景图*/
+.dg-grid-pagetrun .icon-pre{background:url(images/dg-icon.png) repeat-x 0 0;}
+.dg-grid-pagetrun .icon-last{background:url(images/dg-icon.png) repeat-x -28px 0;}
+.dg-grid-pagetrun .icon-up{background:url(images/dg-icon.png) repeat-x -56px 0;}
+.dg-grid-pagetrun .icon-down{background:url(images/dg-icon.png) repeat-x -84px 0;}
+
+/*dg-grid-loading 表格插件-数据列表-加载图标*/
+.dg-grid-loading{position:absolute;width:100%;height:100%;left:0%;top:0%;background:#666 url(images/dg-loading.gif) no-repeat 50% 50%;opacity:0.7;filter:alpha(opacity=70);z-index:999;}
+
+/*dg-grid-right-menu 表格插件-数据列表-右键菜单/下拉菜单*/
+.dg-grid-right-menu,.dg-grid-drop-menu{position:absolute;width:120px;height:auto;padding-top:5px;padding-bottom:5px;background:#EEE;right:10px;top:50px;border:1px solid #CCC;-webkit-box-shadow: #999 2px 2px 3px;-moz-box-shadow: #999 2px 2px 3px;box-shadow: #999 2px 2px 3px;z-index:99;}
+.dg-grid-right-menu a,.dg-grid-drop-menu a{float:left;display:block;margin:0 3px;width:112px;height:24px;line-height:24px; text-indent:5px;border:1px solid #EFEFEF;text-decoration:none;color:#000;}
+.dg-grid-right-menu a:hover,.dg-grid-drop-menu a:hover{color:#000;text-decoration:none;background:url(images/dg-icon.png) repeat-x 0 -128px;border:1px solid #B7CDDE;}
+.dg-grid-drop-menu input{float:left;margin-top:5px;margin-left:5px;}
+.dg-grid-drop-menu .line {float: left;height: 24px;border-left: 1px solid #CCC;border-right: 1px solid white;margin: 0 4px;}
+
+/*dg-grid-box 表格插件-数据列表-弹出层*/
+.dg-grid-box{position:absolute;left:15%;top:15%;width:70%;border:1px solid #AAA; border-radius:4px; box-shadow:2px 2px 3px #ededed; background:#fff;z-index:1000;overflow:auto;}
+.dg-grid-box .title{width:100%;height:26px;line-height:26px;font-size:14px;font-weight:bold;text-indent:10px; background:#EEE;overflow:hidden;}
+.dg-grid-box .title .icon-close{float:right;margin-right:10px;margin-top:4px;width:16px;height:16px;border-radius:2px;border:1px solid #DDD;background:url(images/dg-icon.png) repeat-x -132px -3px;}
+.dg-grid-box .title .icon-colse:hover{border:1px solid #F00;}
+.dg-grid-box table{width:100%;height:auto;border-bottom:1px solid #ccc;}
+.dg-grid-box table th,.dg-grid-box table td{border:1px solid #ccc;border-bottom:none;border-left:none;height:26px;line-height:26px;padding:0 6px;}
+.dg-grid-box table th{text-align:right;width:30%;background:#F9F9F9;}
+.dg-grid-box table td{width:70%;}
+
+/*js css by liuyang 表格插件-数据列表-底部功能-刘洋*/
+.bottomOparete li{float:left;margin:0 5px;line-height:30px;}
+.bottomOparete li input,.bottomOparete li select{margin-top:5px;}
+.bottomOparete span a{float:left;height:20px;line-height:20px;margin:0 3px;padding:0 5px;margin-top:5px;display:block;border:1px solid #999;background:#efefef;}
+
+.operateMenu p{padding:0 10px;line-height:20px;}
+.operateMenu p:hover{background:white;border:1px solid #afce05;border-left:0;border-right:0;}

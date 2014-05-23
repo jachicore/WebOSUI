@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>index</title>
+<link type="text/css" rel="stylesheet" href="css/main.css"/>
+<link type="text/css" rel="stylesheet" href="../../js/ajs/utils/tree/tree/zTreeStyle.css"/>
+<script type="text/javascript" src="js/jquery-1.7.min.js" ></script>
+<script type="text/javascript" src="js/jquery-ui-1.7.3.custom.min.js" ></script>
+<script type="text/javascript" src="js/Gnsuite.js"></script>
+<script type="text/javascript" src="../../js/ajs/utils/tree/tree/jquery.ztree.all-3.2.js"></script>
+<script type="text/javascript" src="../../js/ajs/utils/tree/Gntree.js"></script>
+<script type="text/javascript" src="../../js/ajs/utils/url/jquery.url.js"></script>
+<script>
+	
+	var path = $.url().param('_path');
+	var winid = $.url().param('_winid');
+	//console.log(winid);
+	
+	$(function(){
+		
+		$.gnsuite.init({
+			path : path,
+			callback : function(){
+				var win = top.$.aos.desktop.currentDesktop.getWindowById(winid);
+				
+				var _height = win.height - 168;
+				
+				$.gnsuite.sidebar.css('height', _height);
+				$.gnsuite.flexBtn.css('height', _height);
+				$.gnsuite.frame.css('height', _height);
+				
+				win.onResize = function(event, ui){
+					var _height
+					if(!$.gnsuite.isToolbarMinimize){
+						_height = win.height - 155;
+					}else{
+						_height = win.height - 30;
+					}
+					$.gnsuite.sidebar.css('height', _height);
+					$.gnsuite.flexBtn.css('height', _height);
+					$.gnsuite.frame.css('height', _height);
+				}
+			}
+		});
+	})
+</script>
+</head>
+
+<body>
+	
+</body>
+</html>
+

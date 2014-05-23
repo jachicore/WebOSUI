@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>效果</title>
+<script type="text/javascript" src="js/jquery-1.7.min.js"></script>
+<style type="text/css">
+* {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+p, ul, li, dt, dd, a, img {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.wrap {
+	width:100%;
+	margin:0 auto;
+	padding:0;
+	text-align:center;
+	font:normal 12px/24px Arial;
+	color:#666;
+}
+/* light_layer */
+.light_layer {
+	width:500px;
+	padding:25px;
+	text-align:left;
+	margin:0 auto;
+}
+.light_layer .user_con {
+	width:100%;
+	display:block;
+	margin-bottom:20px;
+	float:left;
+}
+.light_layer .user_con img {
+	width:106px;
+	height:130px;
+	float:left;
+	margin-right:20px;
+	background:url(images/img_no.png);
+}
+.light_layer .user_con table {
+	width:374px;
+	float:left;
+}
+.light_layer .user_con td {
+}
+.light_layer .user_con h1 {
+	font:26px/40px Arial bold;
+	float:left;
+}
+.job {
+	font:18px/40px Arial bold;
+	color:#F00;
+	margin-right:10px;
+	float:right;
+}
+.section {
+	font:12px/40px Arial bold;
+	color:#999;
+	float:right;
+}
+.light_layer .user_tit {
+	width:500px;
+	display:block;
+	float:left;
+	background: url(images/nisp_bg.png) no-repeat 70px -22px;
+	border-bottom:1px dotted #ccc;
+	margin-bottom:5px;
+}
+.light_layer .user_tit b {
+	float:left;
+	font-size:14px;
+}
+.light_layer .user_tit span {
+	float:right;
+	cursor:pointer;
+	padding-right:15px;
+}
+.light_layer p {
+	width:100%;
+	text-indent:25px;
+	float:left;
+}
+.on_show {
+	background:url(images/nisp_bg.png) no-repeat 25px 3px;
+}
+.on_close {
+	background:url(images/nisp_bg.png) no-repeat right 4px;
+}
+.no_edit {
+	width:98%;
+}
+.textarea_edit {
+	border:0;
+	background:#badcf2;
+	width:98%;
+	line-height:24px;
+	padding:2px 0;
+	font-size:12px;
+}
+.edit_input {
+	border:0;
+	background:#badcf2;
+	width:98%;
+	padding:2px 0;
+}
+.wth30 {
+	width:30px;
+}
+.wth150 {
+	width:150px;
+}
+.wth150 span {
+	display: inline-block;
+	width: 150px;
+	height: 100%;
+}
+a.save{ display:block; width:80px; padding:5px; text-decoration:none; background-color:#999; color:#FFF; float:right}
+a.save:hover{ background-color:#CCC}
+
+.unsaved{ color:#F63}
+.user_inf {height: 30px;}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+  <div class="light_layer">
+    <div class="user_con">
+    	<!-- <img src="images/img_no.png"/> -->
+      <table cellpadding="0" cellspacing="0" border="0">
+       <!--  <tr>
+          <td colspan="4" ><h1 id="_name"></h1>
+            <span id="_department" class="section"></span><span id="_title" class="job"></span></td>
+        </tr> -->
+        <tr>
+          <td colspan="4">
+          <table cellpadding="0" cellspacing="0">
+          	  <tr>
+                <td class="wth30">用户:</td>
+                <td class="wth150"><span id="_name" class="no_edit" onClick="spanClick(this)"></span></td>
+                <td class="wth30">部门:</td>
+                <td class="wth150"><span id="_department" class="no_edit" onClick="spanClick(this)"></span></td>
+              </tr>
+              <tr>
+                <td class="wth30">手机:</td>
+                <td class="wth150"><span id="_phone" class="no_edit" onClick="spanClick(this)"></span></td>
+                <td class="wth30">固话:</td>
+                <td class="wth150"><span id="_telephone" class="no_edit" onClick="spanClick(this)"></span></td>
+              </tr>
+              <tr>
+                <td>传真:</td>
+                <td class="wth150"><span id="_fax" class="no_edit" onClick="spanClick(this)"></span></td>
+                <td>QQ:</td>
+                <td class="wth150"><span id="_qq" class="no_edit" onClick="spanClick(this)"></span></td>
+              </tr>
+            </table></td>
+        </tr>
+        <tr>
+          <td class="wth30">电邮:</td>
+          <td colspan="3" class="wth150"><span id="_email" class="no_edit" onClick="spanClick(this)"></span></td>
+        </tr>
+        <tr>
+          <td>地址:</td>
+          <td colspan="3" class="wth150"><span id="_address" class="no_edit" onClick="spanClick(this)"></span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td colspan="3"><a href='#' onClick="changePassword()">更改密码</a></td>
+        </tr>
+      </table>
+    </div>
+    <!-- <div class="user_tit"><b>描述</b><span class="ok on_show">展开</span></div> -->
+    <div class="user_tit"><b>描述</b></div>
+    <p id="_intorduction" class="user_inf"  onClick="pClick(this)"></p>
+    <p><a class="save">保存</a></p>
+  </div>
+</div>
+<script>
+var uu = {};
+$(document).ready(function(){
+	  // $(".user_inf").css('display','none');
+	  $(".save").css('display','none');
+
+	  $(".user_tit .ok").toggle(function(){	
+				$(".user_inf").show();
+				$(this).removeClass();
+				$(this).addClass("on_close");    
+	  }
+	  ,function(){
+					$(".user_inf").hide();
+					$(this).removeClass();
+					$(this).addClass("on_show");    
+	  });
+	  
+	  uu = top.$.aos.users.um.getUser(top.$.aos.users.current);
+	  var profile = JSON.parse(uu.profile);
+	  $("#_name").html(profile.name);
+	  // $("#_department").html('['+profile.department+']');
+	  $("#_department").html(profile.department);
+	  $("#_title").html(profile.title);
+	  $('#_phone').html(profile.phone);
+	  $('#_telephone').html(profile.telephone);
+	  $('#_email').html(profile.email);
+	  $('#_qq').html(profile.qq);
+	  $('#_fax').html(profile.fax);
+	  $('#_address').html(profile.address);
+	  $('#_intorduction').html(profile.introduction);
+	  $(".save").live('click',function(){
+			 profile.name = $('#_name').html();
+			 profile.department = $('#_department').html();
+			 profile.phone = $('#_phone').html();
+			 profile.telephone = $('#_telephone').html();
+			 profile.fax = $('#_fax').html();
+			 profile.qq = $('#_qq').html();
+			 profile.email = $('#_email').html();
+			 profile.address = $('#_address').html();
+			 profile.introduction = $('#_intorduction').html();
+			 top.$.aos.users.um.saveUser(top.$.aos.users.current,JSON.stringify(profile),uu.roles);
+			 alert('保存成功！');
+			 window.location = 'index.html';
+			 
+	  });
+});
+  // click to input edit
+  function spanClick(o){
+		var input = $("<input type='text' class='edit_input' value='"+$(o).html()+"' />");
+		var id = $(o).attr('id');
+		$(o).after(input);
+		$(o).remove();
+		input.focus();
+		input.blur(function(){
+			var str = $(this).val();
+			var span = $("<span id='"+id+"' class='no_edit unsaved' onClick='spanClick(this)'>"+str+"</span>");
+			$(this).after(span);
+			$(this).remove();
+			$('.save').show();
+		});
+	};
+	 // click to textarea edit
+  function pClick(o){
+		var textarea = $("<textarea class='textarea_edit' cols='' rows='8'>"+$(o).html()+"</textarea>");
+		$(o).after(textarea);
+		// $(o).remove();
+		textarea.focus();
+		textarea.blur(function(){
+			var str = $(this).val();
+			// var p = $("<div id='_intorduction' class='user_inf unsaved' onClick='pClick(this)'>"+str+"</div>");
+			$(o).html(str);
+			// $(this).after(p);
+			$(this).remove();
+			$(this).css('display','block');
+			$('.save').show();
+		});
+	};
+	
+  function changePassword(){
+	  var box = parent.$.aos.lightbox.create({
+			width:400,
+			height:350,
+			closable:true,
+		});
+	box.loadIframe("system/Settings/users/profile/ChangePassword.html");
+	
+	  
+  }
+		
+</script>
+</body>
+</html>

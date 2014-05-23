@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>NISP -- Network Interlligent Services Platform</title>
+        <link href="css/main.css" type="text/css" rel="stylesheet" />
+        <link id="_amskin" href="css/gray.css" type="text/css" rel="stylesheet" />
+        <link href="css/dock.css" type="text/css" rel="stylesheet" />
+        <!--[if IE]> <style type="text/css">.window{behavior: url(css/ie-css3.htc);} </style> <![endif]-->
+        <script type="text/javascript" src="js/ajs/jquery/jquery-1.6.2.min.js"></script>
+        <script type="text/javascript" src="js/ajs/lang/aos.js"></script>
+		<script>
+		
+			var alertFallback = true;
+		   if (typeof console === "undefined" || typeof console.log === "undefined") {
+			 console = {};
+			 if (alertFallback) {
+				 console.log = function(msg) {
+					  //alert(msg);
+				 };
+			 } else {
+				 console.log = function() {};
+			 }
+		   }
+		
+			$(document).ready(function(){
+			    $.aos.ready({
+					onImport : function(jspath,data){
+					    //$("body").html("<p>正在载入："+jspath+"......</p>")
+					},
+					finish : function(){
+						
+					    $.aos.desktop.detectBrowser();
+						$.aos.users.createLoginForm();
+					}
+			    });
+			});
+
+        </script>
+
+
+    </head>
+
+    <body>
+        <div class="head_bar">
+        	<!--<div class="head_bar_left"></div>-->
+            <div class="head_menu">
+                <div class="head_info">          
+
+                </div>
+                <div class="head_btndiv"><div class="head_nisp head_noclick"></div>
+                </div>                
+            </div>
+        	<div class="head_bar_right">
+            	<span class="person">Admin</span>
+                <span class="logout">注销</span>
+                <span class="help">帮助</span>
+            </div>
+        </div>
+        <div class="_main">
+            <div class="left_placeholder"></div>
+            <div class="center">
+                <ul class="shortcut-ul" id="shortcut_desk">
+                </ul>
+            </div>
+            <div id="clearfloat"></div>
+            <div id="_fileBrowser"></div>
+        </div>
+        <div class="left_nav">
+              <div class="left_nav_tools">
+                  <span class="prev"></span>
+                  <ul id="_minimizeBar">
+                  	
+                  </ul>
+                  <span class="next"></span>
+                  <hr />
+                  <div class="left_nav_tools_setting">
+                      <a href="#" title="桌面设置" class="_setting"></a>
+                      <a href="#" title="关闭所有窗口" class="_skin"></a>
+                      <br />
+                      <a href="#" title="最小化所有窗口" class="_multiDesktop"></a>
+                      <a href="#" title="恢复所有窗口" class="_expandWindows"></a>
+                  </div>
+              </div>
+        </div>
+        <div class="dock"></div>
+        <!--等待遮挡层-->
+         <div class="waitting_layer">
+         </div>
+        <div class="footer">
+        	<!--<h6>Copyright  2012 GreeNet. 武汉绿色网络信息服务有限责任公司</h6>-->
+            	
+            <div class="screen_icon"></div>
+        </div>
+        <div style=" position:absolute; bottom:0; left:20px; line-height:30px; z-index: 100000; height:30px; color:#FFF">Copyright  2012 GreeNet. 武汉绿色网络信息服务有限责任公司</div>
+<!--        <div class="chatBar" style="position:fixed; bottom:28px; right:0px; height:330px; width:440px; display:none">
+        	<iframe src="system/Settings/chat/message.html" style="width:100%; height:330px;" frameborder="0" ></iframe>
+        </div>-->
+    </body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>app</title>
+<link type="text/css" rel="stylesheet" href="css/main.css"/>
+<script type="text/javascript" src="js/lang/jquery-1.7.min.js"></script>
+<script type="text/javascript" src="js/jquery-smartMenu-min.js"></script>
+<script type="text/javascript">
+var GROUPPATH = "/systemconf/apps/group_";
+var APPPATH = "/systemconf/apps/all";
+
+$(document).ready(function(){
+	
+	//桌面列表
+	var tempArray = [];
+	var tt = [];
+
+	
+	for(var e = 0; e < parent.$.aos.desktop.desktops.length; e++){
+		var ddname = parent.$.aos.desktop.desktops[e].name;
+		var ddpath = parent.$.aos.desktop.desktops[e].root;
+		// 由于作用域链的配置机制，ddname 总是等于最后一个桌面的名字, 这里采用闭包的方式保存当前变量;
+		var ddobj = {
+			path : 	ddpath,
+			fun : function(){
+				var o = this;
+				return function(){
+					// o.path  -- 目标桌面路径
+					// $(this).attr('path')  --  应用路径
+					// $(this).attr('appname')  --  应用名字
+					
+					var desktopfile = {
+						name : $(this).attr('appname'),
+						type : 'file',
+						path : $(this).attr('path')
+					};
+					var desktopPath = o.path+"/"+$(this).attr('appname');
+					
+					if(parent.$.aos.fs.exists(desktopPath) == 'false'){
+						parent.$.aos.fs.create(desktopPath);
+						parent.$.aos.fs.write(desktopPath, JSON.stringify(desktopfile));
+						
+						var node = new parent.$.aos.ui.UINode(parent.$.aos.fs.mapWith(desktopPath));
+						
+						parent.$.aos.desktop.currentDesktop.addShortcut(node);
+					}else{
+						alert('快捷方式已存在');	
+					}
+					
+					return o.path;	
+				}
+			}
+		};
+		
+		var _desk = {
+			text: ddname,
+			func: ddobj.fun()
+		};
+		tt.push(_desk);
+	}
+	
+	var _dock = {
+		text : 	'应用码头',
+		func: function(){
+			// $(this).attr('path')  --  应用路径
+			// $(this).attr('appname')  --  应用名字
+			var dockfile = {
+				type : 'file',
+				path : $(this).attr('path')
+			};
+			var dockPath = "/system/dock/"+$(this).attr('appname');
+			if(parent.$.aos.fs.exists(dockPath) == 'false'){
+				parent.$.aos.fs.create(dockPath);
+				parent.$.aos.fs.write(dockPath, JSON.stringify(dockfile));
+				
+				parent.$.aos.dock.init();
+				
+			}else{
+				alert('快捷方式已存在');	
+			}
+		}	
+	};
+	
+	tt.push(_dock);
+	tempArray.push(tt);
+	
+	//桌面右键菜单
+	var mUnstall = {
+		text: "卸载应用",
+		func: function() {
+			var r=confirm("确定要删除该应用吗？");
+			if (r==true)
+			  {
+			  	window.location = 'app.html';
+			  }
+			else
+			  {
+			  	
+			  }
+		}	
+	}, mRefresh = {
+		text: "刷新",
+		func: function() {
+			window.location = 'app.html';
+		}
+	}, mSendTo = {
+		text: "快捷方式到",
+		data: tempArray
+	};
+/*	var mData = [
+		[mUnstall, mRefresh], [mSendTo]
+	];*/
+	var mData = [
+		[mRefresh], [mSendTo]
+	];
+	
+	listAllApp(mData);
+	//listAllApp();
+	//set-app-icon show	
+	$(".set-app-icon").toggle(
+		function(){
+			$(this).addClass('set-app-icon-current');
+			$(this).siblings().removeClass('set-app-icon-current');
+		},
+		function(){
+			$(this).removeClass('set-app-icon-current');
+		}
+	);
+	
+});
+
+var appArray = new Array();
+	//当前桌面
+var currentDesktop = parent.$.aos.desktop.currentDesktop.name;
+ 
+function listAllApp(data){
+	$(".set-app-list").html('');
+	//var appArray = parent.$.aos.fs.ls("/home/"+parent.$.aos.users.current+"/.app/myapp");
+		
+	/*if(parent.$.aos.users.current == "admin"){
+		appArray = parent.$.aos.fs.ls(APPPATH);
+	}else{
+		var roles = top.$.aos.users.um.getUserRoles(parent.$.aos.users.current);
+		for(var j=0, len=roles.length; j<len; j++){
+			appArray = appArray.concat(parent.$.aos.fs.ls(GROUPPATH+"/"+roles[j]));
+		}
+	}*/
+	//appArray=parent.$.aos.app.getAppsByRole("admin");
+	appArray = parent.$.aos.app.getAppsByRoles(JSON.stringify(parent.$.aos.users.roles));
+	for(var i=0; i < appArray.length;i++){
+		var appfile = appArray[i];
+		var uinode = new parent.$.aos.ui.AppNode(appfile);
+		var name = uinode.name;
+		//name = name.substring(0, name.lastIndexOf('.'));
+		var cont = '';
+		cont += "<div class='set-app-list-half'>";
+		cont += "<div appname='"+name+"' class='set-app-icon'>";
+
+		if(uinode.image.indexOf('http')==-1){
+			cont += "  <span class=''><img src='../../../"+uinode.image+"' width=\"56\" height=\"56\"/></span>";
+		}else{
+			cont += "  <span class=''><img src='"+uinode.image+"' width=\"56\" height=\"56\"/></span>";	
+		}
+		cont += "  <p>"+name+"</p>";
+		cont += "</div>";
+		cont += "<div class='set-app-install'><span class='app-install' data-id='"+uinode.appid+"'>安装</span></div>";
+		cont += "</div>";
+		
+		$cont = $(cont).click(function(){
+			$(this).addClass("set-app-icon-current").siblings().removeClass("set-app-icon-current");
+		});
+		$(".set-app-list").append($cont);
+	}
+	
+	$(".set-app-icon").smartMenu(data, {
+		  name: "_app",
+		  beforeShow: function() {		
+			  
+		  },
+		  afterShow: function() {		
+			  $(document).one('click',$.smartMenu.hide);
+		  }
+	  });
+	
+
+}
+
+function addDesktopApp(){
+	
+	for(var i=0; i < appArray.length;i++){
+		var exeInfo = appArray[i];
+		var exename = exeInfo.appid + ".exe";
+		var desktopPath = "/system/desktops/"+currentDesktop+"/"+exename;
+		if(parent.$.aos.fs.exists(desktopPath) == 'false'){
+			parent.$.aos.fs.create(desktopPath);
+
+		}
+	}
+	
+	alert("添加已完成");
+	parent.$.aos.desktop.currentDesktop.init();
+}
+
+</script>
+
+</head>
+
+<body>
+<!--start warp-->
+<div class="wrap">
+	<!--start ui-tab-->
+    <div class="ui-tab">
+		<!--start ui-tab-triggers-->
+    	<div class="ui-tab-triggers">
+        	<a href="index.html" class="ui-tab-trigger-cell">
+                <span class="skin_icon"></span>
+                <p>主题设置</p>
+            </a>
+            <!---->
+        	<a href="desktop.html" class="ui-tab-trigger-cell">
+                <span class="computer_icon"></span>
+                <p>桌面设置</p>
+            </a>
+            <!---->
+        	<a href="app.html" class="ui-tab-trigger-cell ui-tab-trigger-cell-current">
+                <span class="app_icon"></span>
+                <p>我的应用</p>
+            </a>
+            <!---->
+        	<!--<a href="dock.html" class="ui-tab-trigger-cell">
+                <span class="dock_icon"></span>
+                <p>应用码头设置</p>
+            </a>    -->        
+        </div>
+        <!--ui-tab-triggers-->
+        
+		<!--start ui-tab-container-->
+        <div class="ui-tab-container">
+            <div class="ui-tab-container-cell">
+                <div class="tool-bar">
+                    <!--<a href="#">刷新</a>-->
+                    <a href="#" title="一键添加所有未添加的应用" onclick="addDesktopApp()">一键添加应用</a>
+                </div>
+                <!---->
+                <div class="set-app">
+                    <div class="set-app-list">
+                        <!--<div class="set-app-icon">
+                            <span class=""><img src="css/images/skin_icon.png" width="56" height="56" /></span>
+                            <p>共享检测</p>
+                        </div>-->
+                    </div>
+                </div>
+                <div class="sprite"></div>
+              </div>
+            </div>
+            <!---->
+            
+        </div>
+        <!--end ui-tab-container-->
+    </div>
+    <!--end ui-tab-->
+</div>
+<!--end warp-->
+<script>
+$(function() {
+	$('.app-install').click(function() {
+		var data_id = $(this).attr('data-id');
+		var exename = data_id + ".exe";
+		var desktopPath = "/system/desktops/"+currentDesktop+"/"+exename;
+		if(parent.$.aos.fs.exists(desktopPath) == 'false'){
+			parent.$.aos.fs.create(desktopPath);
+			alert("添加已完成");
+			parent.$.aos.desktop.currentDesktop.init();
+		}
+		else{
+			alert("已安装当前应用");
+		}
+	});
+});
+</script>
+</body>
+</html>
+

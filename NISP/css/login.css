@@ -1,0 +1,12 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{ font-family:Arial, Helvetica, sans-serif, "微软雅黑"; font-size:12px; color:#414242; background-color:#013D83; margin:0}
+
+.login{ position:fixed; top:25%; left:30%; width:511px; height:316px; background-image:url(../images/blue/bk_login-1.jpg)}
+
+.login_form{ margin:80px 0 0 320px}
+.login_form input{ height:20px; border:#59aeff 1px solid; width:110px;}
+.login_form span{ font-weight:bold; width:52px; display:inline-block}
+
+.login_form a.button{ color:#000000; font-size:12px; padding:1px 0 0 10px; margin:0 0 0 115px; display:block; width:35px; height:17px; text-decoration:none; background-image:url(../images/blue/bk_btn1.gif)}

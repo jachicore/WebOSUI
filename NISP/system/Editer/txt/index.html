@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title>dropdown menu</title>
+    <style type="text/css">
+*{ margin:0; padding:0; list-style:none;font:12px "宋体", Arial, Helvetica, sans-serif;}
+ul,dl,li,dd,dt{ list-style:none; }
+body {}
+#text{ width:100%; height:400px; border:none}
+#nav {
+	width:100%; 
+	height:26px;
+	line-height:26px;
+	z-index: 10;
+	display: block;
+	background:#F1F1F1;
+}
+    #nav li { float: left; }
+        #nav li:hover { position: relative }
+        #nav li:hover > a {
+				background:#999;
+				color:#FFF;
+                border-radius: 6px;
+                -moz-border-radius: 6px;
+                -webkit-border-radius: 6px;        
+        }
+            #nav li.sub:hover > a {
+                border-radius: 6px 6px 0 0;
+                -moz-border-radius: 6px 6px 0 0;
+                -webkit-border-radius: 6px 6px 0 0;        
+            }
+
+            #nav li a {
+                color: #666;
+                text-decoration: none;
+                padding:6px 12px;
+                display: block;
+            }
+            #nav li a:hover { background-color: #999; }        
+                    
+    #nav li ul { 
+        background: #fff;
+        margin-top: 0px;
+        display: none;   
+    }
+        #nav li:hover ul {
+            display:block; 
+            position:absolute; 
+        }
+
+        #nav li ul {
+            background:#FFF;
+            padding: 10px 5px;
+            
+			-webkit-box-shadow: #666 2px 2px 3px;
+			-moz-box-shadow: #666 2px 2px 3px;
+			box-shadow: #666 2px 2px 3px;
+			
+			border:1px solid #999;
+            border-radius: 0px 6px 6px 6px;
+            -moz-border-radius: 0px 6px 6px 6px;
+            -webkit-border-radius: 0px 6px 6px 6px;
+        }
+           
+		#nav li ul li a, #nav li ul li a:hover {
+                background: transparent;
+                color: #000;
+                width: 120px;
+                font-weight: normal;
+        }
+        #nav li ul li a:hover { 				
+				text-decoration: none;
+				background:#F1F1F1;
+ 
+                box-shadow: none;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                            
+                border-radius: 0;
+                -moz-border-radius: 0;
+                -webkit-border-radius: 0;
+        }
+   </style>	
+   
+<script language="javascript" type="text/javascript" src="../../../js/ajs/jquery/jquery-1.6.2.min.js"></script>
+<script language="javascript" type="text/javascript" src="../../../js/ajs/utils/url/jquery.url.js"></script>
+<script>
+	$(function(){
+			var winid = $.url().param('_winid');
+			var win = parent.$.aos.desktop.currentDesktop.getWindowById(winid);
+			var title = win.win.find("h3").html()+"(未保存)";;
+			var path = $.url().param('_path');
+			var content = parent.$.aos.fs.read(path);
+			//var content = "here we success read the txt!";
+			$("#text").text(content);
+			
+			$(".sub").mouseover(function(){
+				$(this).children("ul").css("display","block");
+			});
+			
+			$(".sub").mouseout(function(){
+				$(this).children("ul").css("display","none");
+			});
+			
+			//自适应浏览器大小
+			$(window).bind('resize', function() {
+				var width = $(this).width();
+				var height = $(this).height();
+				$('#text').css("width",width);
+				$('#text').css('height', height-20);
+			}).trigger('resize');
+			
+			$("#_save").click(function(){
+				var content = $("#text").val();
+				console.log(path+"   "+content);
+				parent.$.aos.fs.write(path, content);
+				$('#sub1').css("display","none");
+				
+				title = title.substring(0, title.lastIndexOf("(未保存)")==-1?title.length:title.lastIndexOf("(未保存)"));
+				win.win.find("h3").html(title);
+			});
+			
+			$("#_open").click(function(){
+				if($("#text").val()!= content){
+					var t = parent.$.aos.lightbox.create({
+						 width : 260,
+						 height : 100,
+						 closable: true
+					});
+					var _text = $("<div style = 'margin:0px 0 30px 65px;'>是否保存此文档？</div>");
+					var btn1 = $("<button style='margin:0 15px;'>保存</button>").click(function(){
+						var content = $("#text").val();
+						console.log(path+"   "+content);
+						//parent.$.aos.fs.write(path, content);
+						t.del();
+						
+						parent.$.aos.desktop.openFileDialog("system/FileManager/FileDialog/index.html?_winid="+winid+"&_type=open");
+						
+						/*var box = parent.$.aos.lightbox.create({
+							width:1000,
+							height:350,
+							closable:true,
+						});
+						box.loadIframe("system/FileManager/FileDialog/index.html?_winid="+winid+"&_type=open");*/
+						
+					});
+					var btn2 = $("<button style='margin:0 15px 0 0;'>不保存</button>").click(function(){
+						t.del();
+						
+						parent.$.aos.desktop.openFileDialog("system/FileManager/FileDialog/index.html?_winid="+winid+"&_type=open");
+						
+						/*var box = parent.$.aos.lightbox.create({
+							width:1000,
+							height:350,
+							closable:true,
+						});
+						box.loadIframe("system/FileManager/FileDialog/index.html?_winid="+winid+"&_type=open");*/
+						
+					});
+					var btn3 = $("<button>取消</button>").click(function(){
+						t.del();	
+					});
+					
+					var d = $("<div></div>").append(_text).append(btn1).append(btn2).append(btn3);
+					
+					t.loadContents(d);
+					
+				}else{
+					parent.$.aos.desktop.openFileDialog("system/FileManager/FileDialog/index.html?_winid="+winid+"&_type=open");
+						
+						/*var box = parent.$.aos.lightbox.create({
+							width:1000,
+							height:350,
+							closable:true,
+						});
+						box.loadIframe("system/FileManager/FileDialog/index.html?_winid="+winid+"&_type=open");*/
+				}
+			});
+			
+			$("#_exit").click(function(){
+				parent.$.aos.desktop.currentDesktop.removeWindowById(winid);
+			});
+			
+			
+			$("#_saveAs").click(function(){
+				
+				parent.$.aos.desktop.openFileDialog("system/FileManager/FileDialog/index.html?_winid="+winid+"&_type=saveAs&_from=editor&_suffix=.txt",$("#text").val());
+				/*var box = parent.$.aos.lightbox.create({
+					width:1000,
+					height:350,
+					closable:true,
+				});
+				box.loadIframe("system/FileManager/FileDialog/index.html?_winid="+winid+"&_type=saveAs");*/
+				
+				//parent.$.aos.desktop.tmpCache = $("#text").val();
+				
+			});
+			
+			$("#text").keyup(function(){
+				title = title.substring(0, title.lastIndexOf("(未保存)"));
+				title = title+"(未保存)";
+				win.win.find("h3").html(title);
+			});
+			
+	})
+</script>
+</head>
+<body>
+<ul id="nav">
+    <li class="sub"><a href="#">文件(F)</a>
+        <ul id="sub1">
+            <li><a href="#">新建</a></li>
+            <li><a id = "_open" href="#">打开...</a></li>
+            <li><a id="_save" href="#">保存</a></li>
+            <li><a id="_saveAs" href="#">另存为...</a></li>
+            <li><a id="_exit" href="#">退出</a></li>
+        </ul>
+    </li>
+    <li><a href="#">编辑(E)</a>
+    </li>
+    <li><a href="#">格式(O)</a>
+    </li>
+    <li><a href="#">查看(V)</a></li>
+    <li><a href="#">帮助(H)</a></li>
+</ul>
+
+<textarea id="text"></textarea>
+
+</body>
+</html>

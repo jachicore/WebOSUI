@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="pragma" content="no-cache" />
+        <meta http-equiv="Cache-Control" content="no-store, must-revalidate" />
+        <link href="css/mm-base.css" rel="stylesheet" type="text/css"/>
+        <link href="css/mm-common.css" rel="stylesheet" type="text/css"/>
+        <link href="css/mm-element.css" rel="stylesheet" type="text/css"/>
+        <link href="css/smoothness/jquery-ui-1.10.1.custom.min.css" rel="stylesheet" media="screen" />
+        <link href="js/plugin/jqGrid/ui.jqgrid.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="mm-searchbar mm-corner-all mm-title-bg-gray mm-shadow">
+            <p><label class="mm-label">日期:</label>
+                <input name="datepicker" id="datepicker" type="text" class=" mm-input" readonly="readonly"/>
+                <input type="button" id="_search" class="mm-button mm-corner-all" value="查询" />
+            </p>
+        </div>
+        <br/>
+        <div>
+            <table id="logTable"></table>
+            <div id="logTablePager"></div>
+        </div>
+    </body>
+    <script src="js/lang/jquery-1.9.0.min.js" type="text/javascript"></script> 
+    <script src="js/lang/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script> 
+    <script src="js/plugin/jqGrid/jquery.jqGrid.min.js" type="text/javascript"></script> 
+    <script src="js/plugin/jqGrid/grid.locale-cn.js" type="text/javascript"></script> 
+    <script src="js/logic/gridoper.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var names = ["时间", "用户", "执行动作"],
+                model = [
+            {name: "datetime", index: "datetime", align: "center"},
+            {name: "user", index: "user", align: "center"},
+            {name: "desc", index: "desc", align: "center"}
+        ],
+                griddata = [];
+
+        // /aas/searchlog?date=2013/06/17
+        function searchLog(date, callback) {
+            $.ajax({
+                url: "/aas/searchlog",
+                type: "GET",
+                data: {date: date},
+                dataType: "text",
+                success: callback,
+                error: function() {
+                    alert("查询日志失败！");
+                    return;
+                }
+            });
+        }
+
+        function refreshGrid(data) {
+            griddata = [];
+            if (data && data != "false") {
+                var records = data.split('\n');
+                for (var i = 0; i < records.length; i++) {
+                    var record = $.trim(records[i]);
+                    if (record == "")
+                        continue;
+
+                    var fields = record.split(',');
+                    var obj = {
+                        datetime: fields[0],
+                        user: fields[1],
+                        desc: fields[2]
+                    };
+                    griddata.push(obj);
+                }
+            }
+            createOrRefreshGrid({
+                gridid: "logTable",
+                pageid: "logTablePager"
+            }, {
+                colNames: names,
+                colModel: model,
+                data: griddata
+            });
+        }
+
+        function registListener() {
+            $("#_search").click(function() {
+                var date = $.trim($("#datepicker").val());
+                if (date === "") {
+                    alert('请先选择一个日期！');
+                    return;
+                }
+                searchLog(date, refreshGrid);
+            });
+        }
+
+		function initAction(){
+			var date = new Date();
+			var da = [];
+			da.push(date.getFullYear());
+			da.push((date.getMonth() + 1)>9?(date.getMonth() + 1):"0"+(date.getMonth() + 1));
+		    da.push(date.getDate()>9?date.getDate():"0"+date.getDate());
+
+			$("#datepicker").val(da.join('/'));
+			$("#_search").trigger('click');
+		}
+
+        $(function() {
+            $.datepicker.regional['cn'] = {
+                closeText: '关闭',
+                prevText: '<上月',
+                nextText: '下月>',
+                currentText: '今天',
+                monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                monthNamesShort: ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'],
+                dayNames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+                dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+                dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
+                weekHeader: '周',
+                dateFormat: 'yy/mm/dd',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: true,
+                yearSuffix: '年'
+            };
+            $.datepicker.setDefaults($.datepicker.regional['cn']);
+
+            $("#datepicker").datepicker();
+
+            registListener();
+			initAction();
+        });
+    </script>
+</html>

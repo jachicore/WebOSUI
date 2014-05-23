@@ -1,0 +1,311 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+*{margin:0; padding:0; font-size:12px;}
+div.fb{margin:10px 0 0 0; padding:0; font-size:12px;}
+.fb-path{height:30px;width:100%; min-width:770px;line-height:30px; background:#e8e9ea; border-bottom:1px solid #d9d8d8; }
+
+.fb-path ul li{height:30px; line-height:30px;float:left; list-style:none;}
+.fb-path .fb-path-pre{ background:url(../../../images/plugin/filebrowser/fb-path-pre.png) no-repeat center; width:40px; cursor:pointer;}
+.fb-path .fb-path-pre:hover{ background:url(../../../images/plugin/filebrowser/hover-out.png) no-repeat center;}
+.fb-path .fb-path-next{ background:url(../../../images/plugin/filebrowser/fb-path-next.png) no-repeat center;width:40px; cursor:pointer;}
+.fb-path .fb-path-next:hover{ background:url(../../../images/plugin/filebrowser/hover-back.png) no-repeat center;}
+.fb-path .fb-path-parent{ background:url(../../../images/plugin/filebrowser/fb-path-parent.png) no-repeat center;width:40px; cursor:pointer;}
+.fb-path .fb-hidepath{ display:none }
+.fb-path .fb-path-parent:hover{ background:url(../../../images/plugin/filebrowser/hover-bookmark.png) no-repeat center;}
+.fb-path .fb-path-select{height:21px; line-height:21px;margin-top:4px;background-color:white; border:1px solid #babbbc; overflow:hidden;}
+.fb-path .fb-path-select span{ padding:0 5px; cursor:pointer; border-left:1px solid #edf7fb;
+ border-right:1px solid #edf7fb;  display:block; float:left; height:21px; line-height:21px;}
+ .fb-path .fb-path-select span img{ margin:6px 0 0 0;}
+.fb-path .fb-path-select span:hover{ background:#edf7fb;border-left:1px solid #87badd; border-right:1px solid #a5d0e6; }
+.fb-path .fb-path-search{ background:url(../../../images/plugin/filebrowser/fb-path-search.png) no-repeat right center;height:21px;margin-top:4px;width:200px;background-color:white; border:1px solid #babbbc; float:right;}
+.fb-path .fb-path-search a{ display:block; float:right;width:20px;height:23px;}
+.fb-path .fb-path-search input{ border:0;  height:19px;line-height:19px; position:relative; top:-4px;padding:0 5px; width:165px;}
+.fb-path .fb-path-view{ background:url(../../../images/plugin/filebrowser/fb-path-view.png) no-repeat center;width:60px; float:right; text-align:center; cursor:pointer;}
+.fb-path .fb-path-view select.viewSelect{ background:#E8E9EA}
+.showSelectList div:hover{ background:#edf7fb;}
+
+.fb-info{ width:99%; overflow:hidden;  border:1px solid #fff; cursor:pointer;}
+.fb-info:hover{ background:#edf7fb; border:1px solid #87badd;cursor:pointer;}
+
+.fb-info li{ float:left; padding:0 5px;line-height:30px;margin:5px; list-style:none; width:20%;}
+
+.fb-info-hd{height:30px; line-height:30px; background:url(../../../images/plugin/filebrowser/fb-info.gif) repeat-x top;}
+.fb-info-hd:hover{ border:1px solid #fff; background:url(../../../images/plugin/filebrowser/fb-info.gif) repeat-x top;}
+.fb-info-hd li{float:left; padding:0 5px; background:url(../../../images/plugin/filebrowser/fb-info-line.gif) no-repeat top right;}
+
+
+ul.shortcut-ul{ margin:0; padding:0; list-style:none; text-align:center}
+li.shortcut-li{ cursor:pointer;min-height:70px;width:66px;margin-left:15px;padding:10px;color:#000000;text-decoration:none;border: 1px solid transparent;float:left}
+li.shortcut-li:hover { background-image:url(../../../images/icons/icon-bj-1.png); !Important; border: 1px solid #3b567e; }
+li.shortcut-li-selected{ background-image:url(../../../images/icons/icon-bj-1.png); !Important; border: 1px solid #3b567e; }
+li.shortcut-li img{ width:48px; height:48px;}
+li.shortcut-li span.name { display:block; width:62px; height:15px; overflow:hidden; background:url(../../../images/common/name_bg.png) repeat; color:#FFFFFF; padding:2px; -moz-border-radius: 8px; border-radius: 8px;}
+
+/*----btn-bar----*/
+.btn-bar{ width:100%; margin:0; padding:0; background:#eee; height:50px; line-height:50px; font-size:12px; text-indent:10px; text-align:right;}
+.btn-bar span{ margin-top:5px;}
+.btn-bar input{margin-top:10px;}
+.btn-bar .btn-bar-a{ margin:5px 8px;padding:5px 15px;text-decoration:none; border:1px solid #EEE;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;background: -webkit-gradient(linear, 0 0, 0 bottom, from(#FFF), to(#FCFCFC));background: -moz-linear-gradient(#FFF, #FCFCFC);background: linear-gradient(#FFF, #FCFCFC);}
+.btn-bar .btn-bar-a:hover{text-decoration:none;color:#F00;border:1px solid #87BBDC;background: -webkit-gradient(linear, 0 0, 0 bottom, from(#FFF), to(#C2E2F5));background: -moz-linear-gradient(#FFF, #C2E2F5);background: linear-gradient(#FFF, #C2E2F5);}
+/*----btn-bar----*/
+
+
+
+</style>
+
+<link rel="stylesheet" href="tree/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="jquery-1.7.min.js"></script>
+<script type="text/javascript" src="tree/jquery.ztree.all-3.2.js"></script>
+<script type="text/javascript" src="Gntree.js"></script>
+<script language="javascript" type="text/javascript" src="../../../js/ajs/utils/url/jquery.url.js"></script>
+<script>
+
+//暂时这样设计，以后继续优化，讲这个封装为插件，方便调用
+
+	$(document).ready(function(){
+		
+		var path = '/system';
+		var winid = $.url().param('_winid');
+		var _type = $.url().param('_type');
+		var _suffix = $.url().param('_suffix');
+		var _from = $.url().param('_from');       //标记是来处, 比如当是记事本的'另存为'事件时，有相应的处理
+		var isDirOnly = false;
+		var fileTypes = [".txt",".chart",".datagrid","cvs"];
+		
+		
+		switch(_type){
+			case 'saveAs':
+				isDirOnly = true;
+				$("#_openBtn").hide();
+				break	
+			case 'open':
+				isDirOnly = false;
+				$("#_saveBtn").hide();
+				break
+				
+		}
+		
+		for(var l=0; l<fileTypes.length; l++){
+			var option = $("<option value='"+fileTypes[l]+"'>"+fileTypes[l]+"</option>");
+			if(_suffix == fileTypes[l])
+				option.attr("selected",true);
+			$("#_fileTypes").append(option);
+		}
+		
+		$('.fb-left-bar').toggle(function(){
+				$('.fb-left-content').hide();
+				$('.fb-left').css('width','6px');
+				$('.fb-right').css('margin-left','6px');
+				$('.barimg').attr('src','../../../images/plugin/filebrowser/show.png');
+		},function(){
+				$('.fb-left-content').show();
+				$('.fb-left').css('width','200px');
+				$('.fb-right').css('margin-left','200px');
+				$('.barimg').attr('src','../../../images/plugin/filebrowser/hide.png');
+		});
+		
+		var t = $.tree.create({
+			editable : true,
+			div : $("#treeDemo"),
+			path : path,
+			isRightClick : false,
+			isUsingFs : true,
+			dirOnly : isDirOnly
+		});
+		
+		$(".fb-hidepath").html(path);
+		
+		t.onClick = function(event, treeId, treeNode){
+			if(treeNode._type == 'dir'){
+				showFolderFiles(treeNode._path);
+			}else{
+				$(".fb-right ul").html();
+				$(".fb-hidepath").html(treeNode._path);
+				$("#_openTxt").val(treeNode._name);
+			}	
+		}
+		
+		$(".fb-path-parent").click(function(){
+			var str = $(".fb-hidepath").html();
+			str = str.substring(0, str.lastIndexOf('/'));
+			if(str != ''){
+				showFolderFiles(str);	
+			}
+			$(".fb-hidepath").html(str);
+		});
+		
+		$("#_openBtn").click(function(){
+			var name = $("#_openTxt").val();
+			if(name!=''){
+				if(top.$.aos.fs.mapWith($(".fb-hidepath").html()).type == 'file'){
+					parent.$.aos.desktop.currentDesktop.removeWindowById(winid);
+					
+					var win = parent.$.aos.win.create({title:name});
+					win.loadIframe("system/Editer/txt/index.html?_winid="+win.winid+"&_path="+$(".fb-hidepath").html());
+					
+					parent.$.aos.lightbox.del();
+					
+				}else{
+					alert("无法打开文件夹！");	
+				}
+			}
+		});
+		
+		$("#_cancel").click(function(){
+			parent.$.aos.lightbox.del();	
+		});
+		
+		$("#_saveBtn").click(function(){
+			var name = $("#_openTxt").val();
+			if(name!=''){
+				if(top.$.aos.fs.mapWith($(".fb-hidepath").html()).type == 'dir'){
+					var suffix = $("#_fileTypes").val();
+					var path = $(".fb-hidepath").html()+"/"+name+suffix;
+					if(top.$.aos.fs.exists(path) == 'false'){
+						console.log(path+"   "+parent.$.aos.desktop.tmpCache);
+						parent.$.aos.fs.write(path, parent.$.aos.desktop.tmpCache);
+						
+						if(_from == "editor"){
+							parent.$.aos.desktop.currentDesktop.removeWindowById(winid);
+							var win = parent.$.aos.win.create({title:name});
+							win.loadIframe("system/Editer/txt/index.html?_winid="+win.winid+"&_path="+path);
+						}
+						
+						parent.$.aos.lightbox.del();
+					}else{
+						alert("有同名文件存在，请重命名！");
+					}
+					
+				}else{
+					alert("请选择一个文件夹");	
+				}
+			}else{
+				alert("请输入文件名");	
+			}
+		});
+		
+	});
+	
+	
+	function addFolderShortcut(uinode){
+		var _id = this.noteid++;
+		var name = uinode.name;
+		if(uinode.type == 'file'){
+			name = name.substring(0, name.lastIndexOf('.'));
+		}
+		
+		var li;
+		li = $("<li class='shortcut-li am-border-radius' id='_shortcut"+_id+"' path='"+uinode.path+"'appname='"+name+"' apptype='"+uinode.type+"'><img src='../../../"+uinode.icon.img+"' /><span class='name'>"+name+"</span></li>");
+		li.click(function(){
+			var o = $(this);
+			o.find("span").css("position","absolute").css("height","auto");
+			$(document).one('click', function(){ 
+				$(document).one('click', function(){	
+						o.find("span").css("position","").css("height","15px");
+				});
+			});
+			$(this).addClass('shortcut-li-selected').siblings().removeClass('shortcut-li-selected');
+			$("#_openTxt").val($(this).attr('appname'));
+			$(".fb-hidepath").html($(this).attr('path'));
+			if($(this).attr('apptype')=='dir'){
+				$("#_openTxt").val('');
+				showFolderFiles($(this).attr('path'));
+			}
+		});
+		return li;
+	}
+	
+	function showFolderFiles(path){
+		$(".fb-hidepath").html(path);
+		var mul = $(".fb-right ul");
+		var fileArray = top.$.aos.fs.ls(path);
+		$(".fb-path-select").html('');
+		var tt = path.split("/");
+		for(var i=3; i<tt.length; i++){
+			var mpath = $("<span>"+tt[i]+"</span><span><img border=0 src='../../../images/plugin/filebrowser/icon-gt.gif' /></span>");
+			var currentPath = '';
+			for(var j=1; j<=i; j++){
+				currentPath += '/'+tt[j];
+			}
+			mpath.click({
+					pp : currentPath
+				},function(event){
+					$(".fb-hidepath").html(event.data.pp);
+					showFolderFiles(event.data.pp);	
+			});
+			
+			$(".fb-path-select").append(mpath);
+		}
+		
+		
+		mul.html("");
+		mul.addClass("shortcut-ul");
+		if(fileArray != ''){
+			for(var i=0; i < fileArray.length;i++){
+				var f = fileArray[i];
+				addFolderShortcut(new top.$.aos.ui.UINode(f)).appendTo(mul);
+			}
+		}
+	}
+
+
+
+
+</script>
+</head>
+<body>
+<div class="fb">
+    <div class="fb-path">
+        <ul>
+            <li class="fb-path-pre"></li>
+            <li class="fb-path-next"></li>
+            <li class="fb-path-parent"></li>
+            <li class="fb-path-select"></li>
+            <!--<li class="fb-path-view">
+            	<select class="viewSelect">
+                	<option value="iconView">图标</option>
+                    <option value="listView">列表</option>
+                </select>
+            </li>-->
+            <li class="fb-hidepath"></li>
+            <!--<li class="fb-path-search"><input type="text" value="" name="text" /><a class="bt"></a></li>-->
+        </ul>
+    </div>
+    <div style="position:relative;clear:both; min-width:600px;height:230px;margin-bottom: 8px;">
+        <div class="fb-left" style="width:200px; position:absolute; top:0; left:0;">
+            <div class="fb-left-content zTreeDemoBackground" style="width:194px; float:left; height:236px; overflow:auto">
+            	<ul id="treeDemo" class="ztree"></ul>
+            
+            </div>
+            <div class="fb-left-bar" style="width: 6px; display: table-cell; vertical-align: middle; background: none repeat scroll 0% 0% rgb(238, 238, 238); height: 236px; line-height: 236px;">
+                <img class="barimg" style="margin:0;vertical-align:middle;" border="0" src="../../../images/plugin/filebrowser/hide.png" />
+            </div>
+    
+        </div>
+        <div class="fb-right" style="margin-left:200px; height:236px; border-left:1px solid #d9d8d8; overflow:auto">
+        	<ul>
+      		</ul>
+        </div>
+    </div>
+<!--    <div class="bottomlist">
+    	<input id = "_cancel" class="bottombtn" type="button" name="cancel" value="" /><input id="_openBtn" class="bottombtn"  type="button" name="open" value="" /><input id="_saveBtn" class="bottombtn"  type="button" name="save" value="" /><input id="_openTxt" class="bottomtxt" type="text" /><h5>文件名：</h5></div>
+</div>-->
+	<!--start btn-bar-->
+    <div class="btn-bar">
+        <span>文件名：</span>
+        <input id="_openTxt" name="" type="text" />
+        <select id="_fileTypes">
+        	
+        </select>
+        <a id="_openBtn" href="#" class="btn-bar-a">打开</a>
+        <a id="_saveBtn" href="#" class="btn-bar-a">保存</a>
+        <a id="_cancel" href="#" class="btn-bar-a">取消</a>
+    </div>
+    <!--end btn-bar-->
+
+</body>
+</html>
